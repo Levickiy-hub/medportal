@@ -1,0 +1,26 @@
+.mainBlock{
+    position: fixed;
+    top:0;
+    width: 100%;
+    height: 80px;
+    z-index: 990;
+    background-color: rgba(255, 255, 255, 0.5);
+    box-shadow: 0 1px 3px rgba(0,0,0,0);
+    transition: background-color 300ms linear;
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.mainBlock h1{
+    color: #0351c1;
+    font-size: 36px;
+    font-weight: 700;
+    padding-left: 20px;
+}
+.buttonBlock{
+    display:flex;
+    margin-right: 20px;
+}
+.buttonBlock h3{
+    padding-left: 16px;
+}

@@ -1,0 +1,12 @@
+.mainBlock{
+    width: 100%;
+    padding-top: 30px;
+    padding-bottom: 45px;
+    background-color: #cccccc;
+    line-height: 1.23;
+    font-family: 'TildaSans',Arial,sans-serif;
+    text-align:center;
+}
+.mainBlock h1{
+    margin:0;
+}

@@ -1,0 +1,53 @@
+.mainBlock{
+    height: 700px;
+    text-align:center;
+    background-image: url("https://thumb.tildacdn.com/tild3331-6332-4630-b730-643634353232/-/format/webp/Lovepik_com-40008092.jpg");
+    background-image: -webkit-linear-gradient(top, rgba(74,173,28,0.30), rgba(26,26,26,0.70));
+    display: flex;
+    justify-content: space-around;
+    font-family: 'TildaSans',Arial,sans-serif;
+    font-weight: 300;
+}
+.form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center
+}
+.fromContainer{
+    max-width:620px ;
+    display: flex;
+    flex-direction: column;
+    color: #fff;
+    justify-content: center
+}
+
+.fromContainerInput{
+    border:none;
+    -webkit-border-radius: 8px;
+    height: 56px;
+}
+.fromContainer h1{
+   font-size: 44px;
+    font-weight: 600;
+    margin:0;
+ }
+.fromContainer label{
+    margin:0;
+    margin-top:20px;
+    text-align: left;
+    padding-bottom: 4px;
+    font-size: 20px;
+    line-height: 1.55;
+}
+.fromContainer button{
+    margin-top:32px;
+    color: #ffffff;
+    background-color: #103dcf;
+    border: none;
+    border-radius: 7px;
+    -moz-border-radius: 7px;
+    -webkit-border-radius: 7px;
+    height: 56px;
+    padding: 0 20px;
+    width: 100%;
+}

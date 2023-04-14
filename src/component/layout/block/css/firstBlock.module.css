@@ -1,0 +1,75 @@
+.mainBlock{
+    height: 100vh;
+    background:skyblue;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    font-family: 'Arial',Arial,sans-serif;
+    line-height: 1.2;
+}
+.infoBlock{
+    color: white;
+    margin-left: 80px;
+}
+.infoBlock h1{
+    font-size: 48px;
+    margin:0;
+}
+.infoBlock h2{
+    font-size: 20px;
+    margin-top: 2px;
+}
+.selectBlock{
+    margin-top:36px;
+    display:flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width:30%;
+}
+.loginBlock{
+    color:white;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin-right:80px;
+}
+.selectInput{
+    color: rgb(0, 0, 0);
+    background-color: rgb(255, 255, 255);
+    border-radius: 15px;
+    font-size: 16px;
+    font-weight: 400;
+    height: 50px;
+    width:380px;
+}
+.selectButton{
+    margin-top:20px;
+    padding: 0 15px;
+    display: block;
+    width: 160px;
+    font-weight: 600;
+    height: 50px;
+    color: #fff;
+    background-color: #0d18b8;
+    border:none;
+    border-radius: 15px;
+    font-size: 14px;
+    font-family: TildaSans, Arial, sans-serif;
+    cursor: pointer;
+}
+.loginButton{
+    color: #121111;
+    font-size: 16px;
+    font-family: 'Arial',Arial,sans-serif;
+    line-height: 1.55;
+    font-weight: 500;
+    border-radius: 15px;
+    background-color: #e6e6e6;
+    background-position: center center;
+    border-color: transparent;
+    border-style: solid;
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+    width: 160px;
+    height: 50px;
+    cursor: pointer;
+}

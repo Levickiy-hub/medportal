@@ -1,0 +1,27 @@
+.mainBlock{
+    padding-top: 105px;
+    padding-bottom: 105px;
+    background-color: #f5f5f5;
+    display: flex;
+    justify-content: space-evenly;
+    font-family: 'TildaSans',Arial,sans-serif;
+}
+.card{
+    text-align: center;
+    max-width: 300px;
+}
+.cardText{
+
+}
+.cardText h1{
+    margin-top: 12px;
+    font-size: 24px;
+    font-weight: 600;
+}
+.cardText h2{
+    font-size: 20px;
+    margin-top: 24px;
+    line-height: 1.55;
+    font-family: 'TildaSans',Arial,sans-serif;
+    font-weight: 300;
+}

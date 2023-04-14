@@ -3,6 +3,7 @@ import './App.css';
 import Layout from '../src/component/layout'
 import Header from "./component/layout/header"
 import Auth from './component/auth'
+import Order from './component/order'
 function App() {
     return (
          <>
@@ -10,7 +11,8 @@ function App() {
             <Router>
                 <Routes>
                     <Route path="/" element={<Layout/>}/>
-                    <Router path='/auth' element={<Auth/>}/>
+                    <Route path='/authorization' element={<Auth/>}/>
+                    <Route path='/order' element={<Order/>}/>
                     <Route path="*" element={<Layout/>}/>
                 </Routes>
             </Router>

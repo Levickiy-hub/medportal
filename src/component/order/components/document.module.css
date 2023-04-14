@@ -1,0 +1,4 @@
+.checkboxBox{
+    display: flex;
+    flex-direction: column;
+}

@@ -1,0 +1,13 @@
+.mainContainer{
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    background-color: skyblue;
+    align-items: center;
+    align-content: flex-start;
+}
+.stepContainer{
+    margin-top:7%;
+}

@@ -1,0 +1,45 @@
+.paginationContainer{
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+}
+.paginationElement{
+    margin-left: 10px;
+    width: 2em;
+    height: 2em;
+    border: 2px solid black;
+    border-radius: 50%;
+    line-height: 2em;  /* подробнее про line-height */
+    text-align: center;  /* выравнять текст по середине по горизонтали */
+}
+.paginationActiveElement{
+    background-color: deepskyblue;
+}
+.stepContainer{
+    min-width: 60vw;
+    min-height: 5vw;
+    margin-top: 2%;
+    padding: 2vw 2vw 2vw 2vw;
+    line-height: 5vh;
+    background: #FFFFFF;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 15px;
+}
+.buttonControlContainer{
+    margin-top: 8px;
+    display:flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+.buttonControl{
+    border-radius: 5px;
+    width: 136px ;
+    height: 40px;
+    background-color: #FFFFFF;
+    margin-left: 16px;
+    border: 1px solid black;
+}
+.buttonControlNext{
+    background-color: #457fce;
+    color:white;
+}

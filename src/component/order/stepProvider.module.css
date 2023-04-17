@@ -16,7 +16,7 @@
     background-color: deepskyblue;
 }
 .stepContainer{
-    min-width: 60vw;
+    width: 72vw;
     min-height: 5vw;
     margin-top: 2%;
     padding: 2vw 2vw 2vw 2vw;
@@ -42,4 +42,14 @@
 .buttonControlNext{
     background-color: #457fce;
     color:white;
+}
+@media (max-width: 560px ) {
+    .pagText{
+        font-size: .9em;
+    }
+}
+@media (max-width: 340px ) {
+    .pagText{
+        font-size: .6em;
+    }
 }

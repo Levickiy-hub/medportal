@@ -6,9 +6,6 @@
     display: flex;
     align-items: center;
 }
-/*.switch{*/
-
-/*}*/
 .line input[type='checkbox']{
     -webkit-appearance: none;
     width: 80px;
@@ -41,8 +38,42 @@
     align-items: flex-start;
 }
 .inline{
-
+    display: flex;
+    align-items: center
+}
+.inline input{
+    margin-left: 20px;
+    width: -webkit-fill-available;
+    height: 44px;
+    border-radius: 10px;
+    border: 1px solid black;
+    margin-top: 4px;
+}
+.inline label{
+    min-width: max-content;
+}
+.inBoxOrganization{
+    margin-top: 16px;
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
 }
 .inBox{
-
+    margin-top: 16px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.inHalfBox{
+    width: 45%;
+}
+@media(max-width: 900px) {
+    .inHalfBox{
+        width: 100%;
+    }
+}
+@media(max-width: 500px) {
+    .inline{
+        flex-wrap: wrap;
+    }
 }

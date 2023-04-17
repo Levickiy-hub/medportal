@@ -1,22 +1,26 @@
-import React from 'react';
+import React, {useState} from 'react';
 import StepProvider from "./stepProvider";
 import style from './order.module.css'
 import Patient from "./components/Patient";
 import Mottagare from "./components/Mottagare";
 import Dokument from "./components/Dokument";
 import Signera from "./components/Signera";
+import useOrder from "./hooks/OrderHook";
 const Index = () => {
+    const {changePersonNumber,send,changeType,changeTelefon,changeEPostAddress,changeGatuadress,changeFornamn,changePostnummer,changeMessageFile,changeEfternamn,changeWhose,changeProxy,
+    changeAlertType,changeMessage,whose,isActive}=useOrder()
     const data = [
-        <Patient/>,
-        <Mottagare/>,
-        <Dokument/>,
-        <Signera/>
+        {title:"Patient",component:<Patient changePersonNumber={changePersonNumber} changeEPostAddress={changeEPostAddress} changeGatuadress={changeGatuadress}
+                                            changePostnummer={changePostnummer} changeTelefone={changeTelefon} changeFornamn={changeFornamn} changeEfternamn={changeEfternamn}/>},
+        {title:"Mottagare",component:<Mottagare changeWhose={changeWhose}/>},
+        {title:"Dokument",component:<Dokument changeType={changeType} changeMessage={changeMessage} changeMessageFile={changeMessageFile} changeProxy={changeProxy} whose={whose}/>},
+        {title:"Signera",component:<Signera changeAlertType={changeAlertType}/>}
     ];
 
     return (
         <div className={style.mainContainer}>
             <div className={style.stepContainer}>
-           <StepProvider data={data}/>
+           <StepProvider data={data} send={send} isActive={isActive}/>
             </div>
         </div>
     );

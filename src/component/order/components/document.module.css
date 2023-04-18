@@ -2,3 +2,12 @@
     display: flex;
     flex-direction: column;
 }
+.addFileButton{
+    background-image: url("../../../../public/addfile.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 40px;
+    height: 40px;
+    border:none;
+    margin-left:20px
+}

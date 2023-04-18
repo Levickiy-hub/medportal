@@ -16,6 +16,7 @@ export function useOrder() {
     const [messageFile,setMessageFile] = useState(null)
     const [proxy,setProxy] = useState(null)
     const [alertType,setAlertType] =useState(null)
+    const [creator,setCreator] =useState(null)
     const [isActive,setIsActive]=useState([false,false,true]) // кнопка далее активна или нет
 
     function changePersonNumber(value){
@@ -58,6 +59,9 @@ export function useOrder() {
     function changeAlertType(value){
         setAlertType(value)
     }
+    function changeCreator(obj){
+        setCreator(obj)
+    }
     function createObject(){
         const data={
             personNumber:personNumber,
@@ -72,7 +76,8 @@ export function useOrder() {
             message:message,
             messageFile:messageFile,
             proxy:proxy,
-            alertType:alertType
+            alertType:alertType,
+            creator:creator,
         }
         return data
     }
@@ -119,6 +124,7 @@ export function useOrder() {
         changeGatuadress,
         changeFornamn,
         changePostnummer,
+        changeCreator,
         send,
         whose,
         isActive,

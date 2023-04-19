@@ -39,14 +39,12 @@
 }
 .inline{
     display: flex;
-    align-items: center
+    align-items: center;
+    margin-top: 16px;
 }
 .inline input{
     margin-left: 20px;
-    width: -webkit-fill-available;
-    height: 44px;
-    border-radius: 10px;
-    border: 1px solid black;
+    width: 40%;
     margin-top: 4px;
 }
 .inline label{
@@ -67,13 +65,29 @@
 .inHalfBox{
     width: 45%;
 }
+.inHalfBox input{
+    width: 100%;
+
+}
 @media(max-width: 900px) {
     .inHalfBox{
         width: 100%;
+    }
+    .inHalfBox input{
+        width: 40%;
+
     }
 }
 @media(max-width: 500px) {
     .inline{
         flex-wrap: wrap;
     }
+    .inline input{
+       width:70%
+    }
+    .inHalfBox input{
+        width: 70%;
+
+    }
+
 }

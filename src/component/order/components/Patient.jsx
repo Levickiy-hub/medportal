@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import style from './patient.module.css'
-const Patient = ({changePersonNumber,changeEfternamn,changeFornamn,changePostnummer,changeEPostAddress,changeGatuadress,changeTelefone}) => {
+const Patient = ({changePersonNumber,changeEfternamn,changeFornamn,changePostnummer,changeEPostAddress,changeGatuadress,changeTelefone,changePostOrt}) => {
     const [personNumber,setPersonNumber] =useState('')
     const [efternamn,setEfternamn] =useState('')
     const [fornamn,setFornamn] =useState('')
@@ -8,6 +8,13 @@ const Patient = ({changePersonNumber,changeEfternamn,changeFornamn,changePostnum
     const [ePostAddress,setEPostAddress] =useState('')
     const [gatuadress,setGatuadress] =useState('')
     const [telefone,setTelefone] =useState('')
+    const [postOrt,setPostOrt] =useState('')
+    const [addField,setAddField]=useState(false)
+    const [Address2,setAddress2]=useState(false)
+
+    const onClickAddField =()=>{
+        setAddField(!addField)
+    }
     const onChangePersonNumber =(e)=>{
         setPersonNumber(e.target.value)
         changePersonNumber(e.target.value)
@@ -36,6 +43,10 @@ const Patient = ({changePersonNumber,changeEfternamn,changeFornamn,changePostnum
         setTelefone(e.target.value)
         changeTelefone(e.target.value)
     }
+    const onChangePostOrt =(e)=>{
+        setPostOrt(e.target.value)
+        changePostOrt(e.target.value)
+    }
     // useEffect(()=>{
     //     changePersonNumber(personNumber)
     // },[personNumber])
@@ -56,13 +67,27 @@ const Patient = ({changePersonNumber,changeEfternamn,changeFornamn,changePostnum
                     <input type={'text'} onChange={e=>onChangePersonNumber(e)} required/>
                 </div>
                 {personNumber.length > 0 &&
-                <div className={style.box}>
+                <div>
                     <div className={style.lineTableContainer}>
                         <div className={style.lineContainer}><label>Fornamn</label><input type={'text'} onChange={e=>onChangeFornamn(e)} value={fornamn}/></div>
                         <div className={style.lineContainer}><label>Efternamn</label><input type={'text'} onChange={e=>onChangeEfternamn(e)} value={efternamn}/></div>
                     </div>
-                    <div className={style.lineContainer}><label>Gatuadress</label><input type={'text'} onChange={e=>onChangeGatuadress(e)} value={gatuadress}/></div>
-                    <div className={style.lineContainer}><label>Postnummer</label><input type={'text'} onChange={e=>onChangePostnummer(e)} value={postnummer}/></div>
+                    <div className={style.lineContainer}>
+                        <div className={style.lineContainerLabel}>
+                        <label>Gatuadress</label><label className={style.textButton} onClick={()=>onClickAddField()}> Lägg till c/o </label>
+                        </div>
+                        <input type={'text'} onChange={e=>onChangeGatuadress(e)} value={gatuadress}/>
+                    </div>
+                    {addField &&
+                    <div className={style.lineContainer}>
+                        <input type={'text'} onChange={e=>onChangeGatuadress(e)} value={gatuadress}/>
+                    </div>
+                    }
+                    <div className={style.lineTableContainer}>
+                        <div className={style.lineContainer}><label>Postnummer</label><input type={'text'} onChange={e=>onChangePostnummer(e)} value={postnummer}/></div>
+                        <div className={style.lineContainer}><label>Postort</label><input type={'text'} onChange={e=>onChangePostOrt(e)} value={postOrt}/></div>
+                    </div>
+
                     <div className={style.lineContainer}><label>E-postadress</label><input type={'text'} onChange={e=>onChangeEPostAddress(e)} value={ePostAddress}/></div>
                     <div className={style.lineContainer}><label>Telefon</label><input type={'text'} onChange={e=>onChangeTelefone(e)} value={telefone}/></div>
                 </div>

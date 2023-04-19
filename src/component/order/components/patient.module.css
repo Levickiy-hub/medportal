@@ -16,30 +16,44 @@
 }
 .lineContainer input{
     width: 40%;
-    height: 36px;
-    border-radius: 10px;
-    border: 1px solid black;
-    font-size: unset;
 }
 .lineTableContainer{
     display: flex;
     justify-content: space-between;
 }
 .lineTableContainer div{
-    width: 45%;
+    width: 100%;
 }
-.box{
-    padding:8px;
-    margin-top: 12px;
-    border:1px solid black;
+.lineTableContainer input{
+    width: 80%;
+}
+.lineContainerLabel{
+    display: inline-flex;
+    width: 40%;
+    justify-content: space-between;
+}
+.textButton{
+    color:blue;
+}
+.textButton:hover{
+    text-decoration: underline;
 }
 @media (max-width: 660px) {
     .lineContainer input{
+        width: 70%;
+    }
+    .lineContainerLabel{
         width: 70%;
     }
 }
 @media (max-width: 430px) {
     .lineContainer input{
         width: 100%;
+    }
+    .lineContainerLabel{
+        width: 100%;
+    }
+    .lineTableContainer{
+        flex-direction: column;
     }
 }

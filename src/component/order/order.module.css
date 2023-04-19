@@ -11,3 +11,9 @@
 .stepContainer{
     margin-top:92px;
 }
+.mainContainer input[type='text']{
+    height: 36px;
+    font-size: unset;
+    border-radius: 10px;
+    border: 1px solid black;
+}

@@ -8,6 +8,7 @@ export function useOrder() {
     const [efternamn,setEfternamn] = useState('')
     const [gatuadress,setGatuadress] = useState('')
     const [postnummer,setPostnummer] =useState('')
+    const [postOrt,setPostOrt] =useState('')
     const [ePostAddress,setEPostAddress] = useState('')
     const [telefon,setTelefon]=useState('')
     const [whose,setWhose]=useState(null);
@@ -17,6 +18,7 @@ export function useOrder() {
     const [proxy,setProxy] = useState(null)
     const [alertType,setAlertType] =useState(null)
     const [creator,setCreator] =useState(null)
+    const [mailingAddress,setMailingAddress]=useState(null)
     const [isActive,setIsActive]=useState([false,false,true]) // кнопка далее активна или нет
 
     function changePersonNumber(value){
@@ -59,18 +61,27 @@ export function useOrder() {
     function changeAlertType(value){
         setAlertType(value)
     }
+    function changePostOrt(value){
+        setPostOrt(value)
+    }
     function changeCreator(obj){
         setCreator(obj)
     }
+    function changeMallingAddress(obj){
+        setMailingAddress(obj)
+    }
     function createObject(){
         const data={
-            personNumber:personNumber,
-            fornamn:fornamn,
-            efternamn:efternamn,
-            gatuadress:gatuadress,
-            postnummer:postnummer,
-            ePostAddress:ePostAddress,
-            telefon:telefon,
+            patient:{
+                personNumber:personNumber,
+                fornamn:fornamn,
+                efternamn:efternamn,
+                gatuadress:gatuadress,
+                postnummer:postnummer,
+                postOrt:postOrt,
+                ePostAddress:ePostAddress,
+                telefon:telefon,
+            },
             whose:whose,
             type:type,
             message:message,
@@ -78,6 +89,7 @@ export function useOrder() {
             proxy:proxy,
             alertType:alertType,
             creator:creator,
+            mailingAddress:mailingAddress
         }
         return data
     }
@@ -125,6 +137,8 @@ export function useOrder() {
         changeFornamn,
         changePostnummer,
         changeCreator,
+        changePostOrt,
+        changeMallingAddress,
         send,
         whose,
         isActive,

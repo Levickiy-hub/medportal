@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import style from './patient.module.css'
-const Patient = ({changePersonNumber,changeEfternamn,changeFornamn,changePostnummer,changeEPostAddress,changeGatuadress,changeTelefone,changePostOrt}) => {
+const Patient = ({changePersonNumber,changeEfternamn,changeFornamn,changePostnummer,changeEPostAddress,changeGatuadress,
+                     changeTelefone,changePostOrt,changeAddress2}) => {
     const [personNumber,setPersonNumber] =useState('')
     const [efternamn,setEfternamn] =useState('')
     const [fornamn,setFornamn] =useState('')
@@ -10,7 +11,7 @@ const Patient = ({changePersonNumber,changeEfternamn,changeFornamn,changePostnum
     const [telefone,setTelefone] =useState('')
     const [postOrt,setPostOrt] =useState('')
     const [addField,setAddField]=useState(false)
-    const [Address2,setAddress2]=useState(false)
+    const [address2,setAddress2]=useState('')
 
     const onClickAddField =()=>{
         setAddField(!addField)
@@ -38,6 +39,10 @@ const Patient = ({changePersonNumber,changeEfternamn,changeFornamn,changePostnum
     const onChangeGatuadress =(e)=>{
         setGatuadress(e.target.value)
         changeGatuadress(e.target.value)
+    }
+    const onChangeAddress2 =(e)=>{
+        setAddress2(e.target.value)
+        // changeGatuadress(e.target.value)
     }
     const onChangeTelefone =(e)=>{
         setTelefone(e.target.value)
@@ -80,7 +85,7 @@ const Patient = ({changePersonNumber,changeEfternamn,changeFornamn,changePostnum
                     </div>
                     {addField &&
                     <div className={style.lineContainer}>
-                        <input type={'text'} onChange={e=>onChangeGatuadress(e)} value={gatuadress}/>
+                        <input type={'text'} onChange={e=>onChangeAddress2(e)} value={address2}/>
                     </div>
                     }
                     <div className={style.lineTableContainer}>

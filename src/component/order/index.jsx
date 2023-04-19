@@ -8,11 +8,11 @@ import Signera from "./components/Signera";
 import useOrder from "./hooks/OrderHook";
 const Index = () => {
     const {changePersonNumber,send,changeType,changeTelefon,changeEPostAddress,changeGatuadress,changeFornamn,changePostnummer,changeMessageFile,changeEfternamn,changeWhose,changeProxy,
-    changeAlertType,changeMessage,whose,isActive,changeCreator,changePostOrt,changeMallingAddress}=useOrder()
+    changeAlertType,changeMessage,whose,isActive,changeCreator,changePostOrt,changeMallingAddress,changeAddress2}=useOrder()
     const data = [
         {title:"Patient",component:<Patient changePersonNumber={changePersonNumber} changeEPostAddress={changeEPostAddress} changeGatuadress={changeGatuadress}
                                             changePostnummer={changePostnummer} changeTelefone={changeTelefon} changeFornamn={changeFornamn} changeEfternamn={changeEfternamn}
-            changePostOrt={changePostOrt}/>},
+            changePostOrt={changePostOrt} changeAddress2={changeAddress2}/>},
         {title:"Beställare",component:<Mottagare changeWhose={changeWhose} changeCreator={changeCreator}/>},
         {title:"Dokument",component:<Dokument changeType={changeType} changeMessage={changeMessage} changeMessageFile={changeMessageFile} changeProxy={changeProxy} whose={whose}/>},
         {title:"Signera",component:<Signera changeAlertType={changeAlertType} changeMallingAddress={changeMallingAddress}/>}

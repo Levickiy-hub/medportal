@@ -7,6 +7,7 @@ export function useOrder() {
     const [fornamn,setFornamn] = useState('')
     const [efternamn,setEfternamn] = useState('')
     const [gatuadress,setGatuadress] = useState('')
+    const [address2,setAddress2] = useState('')
     const [postnummer,setPostnummer] =useState('')
     const [postOrt,setPostOrt] =useState('')
     const [ePostAddress,setEPostAddress] = useState('')
@@ -32,6 +33,9 @@ export function useOrder() {
     }
     function changeGatuadress(value){
         setGatuadress(value)
+    }
+    function changeAddress2(value){
+        setAddress2(value)
     }
     function changePostnummer(value){
         setPostnummer(value)
@@ -77,6 +81,7 @@ export function useOrder() {
                 fornamn:fornamn,
                 efternamn:efternamn,
                 gatuadress:gatuadress,
+                address2:address2,
                 postnummer:postnummer,
                 postOrt:postOrt,
                 ePostAddress:ePostAddress,
@@ -139,6 +144,7 @@ export function useOrder() {
         changeCreator,
         changePostOrt,
         changeMallingAddress,
+        changeAddress2,
         send,
         whose,
         isActive,

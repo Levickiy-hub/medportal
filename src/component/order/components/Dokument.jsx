@@ -60,7 +60,7 @@ const Dokument = ({changeMessage,changeMessageFile,changeType,changeProxy,whose}
             </div>
             <div>
                 <h1>Meddelande</h1>
-                <textarea value={message} onChange={e => onChangeMessage(e)}/>
+                <textarea className={style.message} value={message} onChange={e => onChangeMessage(e)}/>
                 <button className={style.addFileButton} onClick={() => handlerPick()}/>
                 <input type={'file'} hidden={true} ref={filePicker} onChange={e => handleUpload(e.target.files)}
                        multiple/>
@@ -79,7 +79,7 @@ const Dokument = ({changeMessage,changeMessageFile,changeType,changeProxy,whose}
                 <button className={style.addFileButton} onClick={() => handlerPickFullMark()}/>
                 <input type={"file"} hidden={true} ref={filePickerFullMark} onChange={e => handleUpload(e.target.files)}
                        multiple/>
-                <button>BankID</button>
+                <button className={style.bankIdButton}>BankID</button>
             </div>}
         </div>
     );

@@ -3,11 +3,46 @@
     flex-direction: column;
 }
 .container{
-display: flex;
+    display: flex;
     align-items: center;
     justify-content: space-between;
     margin-top: 20px;
 }
 .container input{
-    width:80%
+    width:300px
 }
+.address{
+    width:389px;
+}
+.addressContainer input{
+    width: 120px;
+}
+@media (max-width: 550px) {
+    .address {
+        width: 250px;
+    }
+
+    .container input {
+        width: 150px
+    }
+
+    .addressContainer input {
+        width: 60px;
+    }
+}
+    @media (max-width: 350px) {
+        .address {
+            width: 200px;
+        }
+
+        .container input {
+            width: 100px
+        }
+
+        .addressContainer input {
+            width: 100px;
+        }
+        .addressContainer{
+            flex-wrap: wrap;
+        }
+    }

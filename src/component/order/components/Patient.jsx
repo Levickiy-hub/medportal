@@ -1,4 +1,5 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react'
+import {useHttp} from "../../../API";
 import style from './patient.module.css'
 const Patient = ({changePersonNumber,changeEfternamn,changeFornamn,changePostnummer,changeEPostAddress,changeGatuadress,
                      changeTelefone,changePostOrt,changeAddress2}) => {
@@ -12,7 +13,7 @@ const Patient = ({changePersonNumber,changeEfternamn,changeFornamn,changePostnum
     const [postOrt,setPostOrt] =useState('')
     const [addField,setAddField]=useState(false)
     const [address2,setAddress2]=useState('')
-
+    const {request} =useHttp()
     const onClickAddField =()=>{
         setAddField(!addField)
     }
@@ -55,6 +56,9 @@ const Patient = ({changePersonNumber,changeEfternamn,changeFornamn,changePostnum
     // useEffect(()=>{
     //     changePersonNumber(personNumber)
     // },[personNumber])
+    useEffect(()=>{
+        request('http://localhost:3000/1','GET').then(data=>console.log(data))
+    },[])
     return (
         <div className={style.mainContainer}>
             <div>

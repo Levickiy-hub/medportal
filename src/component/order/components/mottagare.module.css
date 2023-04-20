@@ -32,62 +32,43 @@
 .line input:checked[type='checkbox']:before{
     float: right;
 }
-.box{
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-}
-.inline{
-    display: flex;
-    align-items: center;
+.container input{
+    width: 350px;
     margin-top: 16px;
 }
-.inline input{
-    margin-left: 20px;
-    width: 40%;
-    margin-top: 4px;
+.nameContainer{
+display: flex;
 }
-.inline label{
-    min-width: max-content;
+.nameContainer input{
+    width:175px;
 }
-.inBoxOrganization{
-    margin-top: 16px;
-    display:flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-}
-.inBox{
-    margin-top: 16px;
-    width: 100%;
+.organizationContainer{
     display: flex;
-    flex-direction: column;
 }
-.inHalfBox{
-    width: 45%;
+.address{
+    display: flex;
+    max-width: 350px;
 }
-.inHalfBox input{
-    width: 100%;
-
+.address input{
+    width:50%;
 }
-@media(max-width: 900px) {
-    .inHalfBox{
-        width: 100%;
+@media(max-width: 990px) {
+    .container input{
+        width: 180px;
     }
-    .inHalfBox input{
-        width: 40%;
-
+    .address{
+        max-width: 180px;
     }
 }
-@media(max-width: 500px) {
-    .inline{
-        flex-wrap: wrap;
+@media(max-width: 525px) {
+    .nameContainer{
+        flex-direction: column;
     }
-    .inline input{
-       width:70%
+    .organizationContainer{
+        flex-direction: column;
     }
-    .inHalfBox input{
-        width: 70%;
-
+    .organizationContainerItem{
+        display: flex;
+        flex-direction: column;
     }
-
 }

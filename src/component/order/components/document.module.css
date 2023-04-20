@@ -11,3 +11,27 @@
     border:none;
     margin-left:20px
 }
+.bankIdButton{
+    border-radius: 5px;
+    width: 136px;
+    height: 40px;
+    background-color: #FFFFFF;
+    margin-left: 16px;
+    border: 1px solid black;
+}
+.message{
+    width:350px;
+    height: 150px;
+    border-radius: 10px;
+    resize: vertical;
+}
+@media(max-width: 490px){
+    .message{
+        width:290px;
+    }
+}
+@media(max-width: 400px){
+    .message{
+        width:190px;
+    }
+}

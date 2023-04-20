@@ -37,10 +37,34 @@ const Mottagare = ({changeWhose,changeCreator}) => {
     }, [checkedValue])
 
     useEffect(() => {
-        const fact ={orgNr:orgNr,fakturAdress1:fakturAdress1,fakturEv:fakturEv,fakturPostnummer:fakturPostnummer,fakturOrt:fakturgOrt,fakturEmail:fakturEmail,fakturTel:orgTel}
-        const org ={organisation:organisation,orgAdress1:orgAdress1,orgEv:orgEv,orgPostnummer:orgPostnummer,orgOrt:orgOrt,orgEmail:orgEmail,orgTel:orgTel}
-        const person = {personnummer:personnummer,fornamn:fornamn,efternamn:efternamn,email:email,telNr:telNr,befattning:befattning,referens:referens}
-        changeCreator({Faktureringsadress:fact,org:org,person:person})
+        const fact = {
+            orgNr: orgNr,
+            fakturAdress1: fakturAdress1,
+            fakturEv: fakturEv,
+            fakturPostnummer: fakturPostnummer,
+            fakturOrt: fakturgOrt,
+            fakturEmail: fakturEmail,
+            fakturTel: orgTel
+        }
+        const org = {
+            organisation: organisation,
+            orgAdress1: orgAdress1,
+            orgEv: orgEv,
+            orgPostnummer: orgPostnummer,
+            orgOrt: orgOrt,
+            orgEmail: orgEmail,
+            orgTel: orgTel
+        }
+        const person = {
+            personnummer: personnummer,
+            fornamn: fornamn,
+            efternamn: efternamn,
+            email: email,
+            telNr: telNr,
+            befattning: befattning,
+            referens: referens
+        }
+        changeCreator({Faktureringsadress: fact, org: org, person: person})
     }, [
         fakturAdress1,
         fakturEv,
@@ -82,16 +106,16 @@ const Mottagare = ({changeWhose,changeCreator}) => {
         setBefattning(e.target.value)
     }
     const changeOrganisation = (e) => {
-        if(organisation===orgNr){
+        if (organisation === orgNr) {
             setOrgNr(e.target.value)
         }
-         setOrganisation(e.target.value)
+        setOrganisation(e.target.value)
     }
     const changeOrgNr = (e) => {
-          setOrgNr(e.target.value)
+        setOrgNr(e.target.value)
     }
     const changeOrgAddress = (e) => {
-        if(orgAdress1===fakturAdress1){
+        if (orgAdress1 === fakturAdress1) {
             setFakturAdress1(e.target.value)
         }
         setOrgAdress1(e.target.value)
@@ -100,7 +124,7 @@ const Mottagare = ({changeWhose,changeCreator}) => {
         setFakturAdress1(e.target.value)
     }
     const changeOrgPostnummer = (e) => {
-        if(orgPostnummer===fakturPostnummer){
+        if (orgPostnummer === fakturPostnummer) {
             setFakturPostnummer(e.target.value)
         }
         setOrgPostnummer(e.target.value)
@@ -109,7 +133,7 @@ const Mottagare = ({changeWhose,changeCreator}) => {
         setFakturPostnummer(e.target.value)
     }
     const changeOrgEV = (e) => {
-        if(orgEv===fakturEv){
+        if (orgEv === fakturEv) {
             setFakturEv(e.target.value)
         }
         setOrgEv(e.target.value)
@@ -118,7 +142,7 @@ const Mottagare = ({changeWhose,changeCreator}) => {
         setFakturEv(e.target.value)
     }
     const changeOrgOrt = (e) => {
-        if(orgOrt===fakturgOrt){
+        if (orgOrt === fakturgOrt) {
             setFakturOrt(e.target.value)
         }
         setOrgOrt(e.target.value)
@@ -127,7 +151,7 @@ const Mottagare = ({changeWhose,changeCreator}) => {
         setFakturOrt(e.target.value)
     }
     const changeOrgEmail = (e) => {
-        if(orgEmail===fakturEmail){
+        if (orgEmail === fakturEmail) {
             setFakturEmail(e.target.value)
         }
         setOrgEmail(e.target.value)
@@ -136,7 +160,7 @@ const Mottagare = ({changeWhose,changeCreator}) => {
         setFakturEmail(e.target.value)
     }
     const changeOrgTel = (e) => {
-        if(orgTel===fakturTel){
+        if (orgTel === fakturTel) {
             setFakturTel(e.target.value)
         }
         setOrgTel(e.target.value)
@@ -161,91 +185,93 @@ const Mottagare = ({changeWhose,changeCreator}) => {
                 </div>
             </div>
             {checkedValue === 2 &&
-            <div className={style.box}>
+            <div className={style.container}>
                 <h2>Beställare</h2>
-                <div className={style.inline}>
+                <div>
                     <label>Personnummer</label>
                     <input type={'text'} onChange={e => changePersonalNumber(e)}/>
                 </div>
-                {personnummer.length > 0 && <div className={style.inBox}>
-                    <div >
-                        <div className={style.inline}>
-                            <label>Förnamn </label>
-                            <input type={'text'} value={fornamn} onChange={e=>changeFornamn(e)}/>
+                {personnummer.length > 0 && <div>
+                    <div>
+                        <div className={style.nameContainer}>
+                            <div>
+                                <label>Förnamn </label>
+                                <input type={'text'} value={fornamn} onChange={e => changeFornamn(e)}/>
+                            </div>
+                            <div>
+                                <label>Efternamn </label>
+                                <input type={'text'} value={efternamn} onChange={e => changeEfternamn(e)}/>
+                            </div>
                         </div>
-                        <div className={style.inline}>
-                            <label>Efternamn </label>
-                            <input type={'text'} value={efternamn} onChange={e=>changeEfternamn(e)}/>
-                        </div>
-                        <div className={style.inline}>
+                        <div>
                             <label>E-mail </label>
-                            <input type={'text'} value={email} onChange={e=>changeEmail(e)}/>
+                            <input type={'text'} value={email} onChange={e => changeEmail(e)}/>
                         </div>
-                        <div className={style.inline}>
+                        <div>
                             <label>Tel.nr. </label>
-                            <input type={'text'} value={telNr} onChange={e=>changeTel(e)}/>
+                            <input type={'text'} value={telNr} onChange={e => changeTel(e)}/>
                         </div>
-                        <div className={style.inline}>
+                        <div>
                             <label>Befattning </label>
-                            <input type={'text'} value={befattning} onChange={e=>changeBefattning(e)}/>
+                            <input type={'text'} value={befattning} onChange={e => changeBefattning(e)}/>
                         </div>
                     </div>
-                    <div className={style.inBoxOrganization}>
-                    <div className={style.inHalfBox}>
-                        <div className={style.inline}>
-                            <label>Organisation </label>
-                            <input type={'text'} value={organisation} onChange={e=>changeOrganisation(e)}/>
+                    <div className={style.organizationContainer}>
+                        <div>
+                            <div>
+                                <label>Organisation </label>
+                                <input type={'text'} value={organisation} onChange={e => changeOrganisation(e)}/>
+                            </div>
+                            <label>Org. adress: </label>
+                            <div className={style.organizationContainerItem}>
+                                <input type={'text'} placeholder={'Adress1'} value={orgAdress1}
+                                       onChange={e => changeOrgAddress(e)}/>
+
+                                <input type={'text'} placeholder={'ev. c/o'} value={orgEv}
+                                       onChange={e => changeOrgEV(e)}/>
+                                <div className={style.address}>
+                                    <input type={'text'} placeholder={'Postnummer'} value={orgPostnummer}
+                                           onChange={e => changeOrgPostnummer(e)}/>
+                                    <input type={'text'} placeholder={'Ort'} value={orgOrt}
+                                           onChange={e => changeOrgOrt(e)}/>
+                                </div>
+                                <input type={'text'} placeholder={'E-mail'} value={orgEmail}
+                                       onChange={e => changeOrgEmail(e)}/>
+
+                                <input type={'text'} placeholder={'Tel nr'} value={orgTel}
+                                       onChange={e => changeOrgTel(e)}/>
+                            </div>
                         </div>
-                        <label>Org. adress: </label>
-                        <div className={style.inline}>
-                            <input type={'text'} placeholder={'Adress1'} value={orgAdress1} onChange={e=>changeOrgAddress(e)}/>
+                        <div>
+                            <div>
+                                <label>Org.nr. </label>
+                                <input type={'text'} value={orgNr} onChange={e => changeOrgNr(e)}/>
+                            </div>
+                            <label>Faktureringsadress: </label>
+                            <div className={style.organizationContainerItem}>
+                                <input type={'text'} placeholder={'Adress1'} value={fakturAdress1}
+                                       onChange={e => changeFaktAddress(e)}/>
+
+                                <input type={'text'} placeholder={'ev. c/o'} value={fakturEv}
+                                       onChange={e => changeFaktEV(e)}/>
+                                <div className={style.address}>
+                                    <input type={'text'} placeholder={'Postnummer'} value={fakturPostnummer}
+                                           onChange={e => changeFaktPostnummer(e)}/>
+                                    <input type={'text'} placeholder={'Ort'} value={fakturgOrt}
+                                           onChange={e => changeFaktOrt(e)}/>
+                                </div>
+                                <input type={'text'} placeholder={'E-mail'} value={fakturEmail}
+                                       onChange={e => changeFaktEmail(e)}/>
+
+                                <input type={'text'} placeholder={'Tel nr'} value={fakturTel}
+                                       onChange={e => changeFaktTel(e)}/>
+                            </div>
                         </div>
-                        <div className={style.inline}>
-                            <input type={'text'} placeholder={'ev. c/o'} value={orgEv} onChange={e=>changeOrgEV(e)}/>
-                        </div>
-                        <div className={style.inline}>
-                            <input type={'text'} placeholder={'Postnummer'} value={orgPostnummer} onChange={e=>changeOrgPostnummer(e)}/>
-                        </div>
-                        <div className={style.inline}>
-                            <input type={'text'} placeholder={'Ort'}value={orgOrt} onChange={e=>changeOrgOrt(e)}/>
-                        </div>
-                        <div className={style.inline}>
-                            <input type={'text'} placeholder={'E-mail'} value={orgEmail} onChange={e=>changeOrgEmail(e)}/>
-                        </div>
-                        <div className={style.inline}>
-                            <input type={'text'} placeholder={'Tel nr'} value={orgTel} onChange={e=>changeOrgTel(e)}/>
-                        </div>
-                    </div>
-                    <div className={style.inHalfBox}>
-                        <div className={style.inline}>
-                            <label>Org.nr. </label>
-                            <input type={'text'} value={orgNr} onChange={e=>changeOrgNr(e)}/>
-                        </div>
-                        <label>Faktureringsadress: </label>
-                        <div className={style.inline}>
-                            <input type={'text'} placeholder={'Adress1'} value={fakturAdress1} onChange={e=>changeFaktAddress(e)}/>
-                        </div>
-                        <div className={style.inline}>
-                            <input type={'text'} placeholder={'ev. c/o'} value={fakturEv} onChange={e=>changeFaktEV(e)}/>
-                        </div>
-                        <div className={style.inline}>
-                            <input type={'text'} placeholder={'Postnummer'} value={fakturPostnummer} onChange={e=>changeFaktPostnummer(e)}/>
-                        </div>
-                        <div className={style.inline}>
-                            <input type={'text'} placeholder={'Ort'} value={fakturgOrt} onChange={e=>changeFaktOrt(e)}/>
-                        </div>
-                        <div className={style.inline}>
-                            <input type={'text'} placeholder={'E-mail'} value={fakturEmail} onChange={e=>changeFaktEmail(e)}/>
-                        </div>
-                        <div className={style.inline}>
-                            <input type={'text'} placeholder={'Tel nr'} value={fakturTel} onChange={e=>changeFaktTel(e)}/>
-                        </div>
-                    </div>
                     </div>
                     <div>
-                        <div className={style.inline}>
+                        <div>
                             <label>Ev.referens: </label>
-                            <input type={'text'} value={referens} onChange={e=>changeReference(e)}/>
+                            <input type={'text'} value={referens} onChange={e => changeReference(e)}/>
                         </div>
                     </div>
                 </div>

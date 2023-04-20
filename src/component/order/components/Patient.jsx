@@ -43,7 +43,7 @@ const Patient = ({changePersonNumber,changeEfternamn,changeFornamn,changePostnum
     }
     const onChangeAddress2 =(e)=>{
         setAddress2(e.target.value)
-        // changeGatuadress(e.target.value)
+        changeAddress2(e.target.value)
     }
     const onChangeTelefone =(e)=>{
         setTelefone(e.target.value)
@@ -57,7 +57,7 @@ const Patient = ({changePersonNumber,changeEfternamn,changeFornamn,changePostnum
     //     changePersonNumber(personNumber)
     // },[personNumber])
     useEffect(()=>{
-        request('http://localhost:3000/1','GET').then(data=>console.log(data))
+        request('http://localhost:3002/1','GET').then(data=>console.log(data))
     },[])
     return (
         <div className={style.mainContainer}>

@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-
+import {useHttp} from "../../../API";
 
 export function useOrder() {
     const [clinic,setClinic] = useState(null)
@@ -22,6 +22,7 @@ export function useOrder() {
     const [mailingAddress,setMailingAddress]=useState(null)
     const [isActive,setIsActive]=useState([false,false,true]) // кнопка далее активна или нет
 
+    const{request}=useHttp()
     function changePersonNumber(value){
         setPersonNumber(value);
     }
@@ -47,7 +48,6 @@ export function useOrder() {
         setTelefon(value)
     }
     function changeWhose(value){
-        console.log(value)
         setWhose(value)
     }
     function changeType(value){
@@ -105,6 +105,7 @@ export function useOrder() {
         const data = createObject();
         if(validate(data)){
             console.log(data);
+            request('http://localhost:3002/orders/','POST',data).then(data=>console.log(data)).then(err=>console.log(err))
         }
     }
     useEffect(()=>{

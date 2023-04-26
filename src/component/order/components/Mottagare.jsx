@@ -37,34 +37,38 @@ const Mottagare = ({changeWhose,changeCreator}) => {
     }, [checkedValue])
 
     useEffect(() => {
-        const fact = {
-            orgNr: orgNr,
-            fakturAdress1: fakturAdress1,
-            fakturEv: fakturEv,
-            fakturPostnummer: fakturPostnummer,
-            fakturOrt: fakturgOrt,
-            fakturEmail: fakturEmail,
-            fakturTel: orgTel
+        const Billing = {
+            Address1: fakturAdress1,
+            Ev: fakturEv,
+            Postcode: fakturPostnummer,
+            Post_town: fakturgOrt,
+            Email: fakturEmail,
+            Phone: orgTel
         }
         const org = {
-            organisation: organisation,
-            orgAdress1: orgAdress1,
-            orgEv: orgEv,
-            orgPostnummer: orgPostnummer,
-            orgOrt: orgOrt,
-            orgEmail: orgEmail,
-            orgTel: orgTel
+            Address1: orgAdress1,
+            Ev: orgEv,
+            Postcode: orgPostnummer,
+            Post_town: orgOrt,
+            Email: orgEmail,
+            Phone: orgTel
         }
         const person = {
-            personnummer: personnummer,
-            fornamn: fornamn,
-            efternamn: efternamn,
-            email: email,
-            telNr: telNr,
-            befattning: befattning,
+            Personal_number: personnummer,
+            First_name: fornamn,
+            Last_name: efternamn,
+            Email: email,
+            Mob_number: telNr,
+            Position: befattning,
             referens: referens
         }
-        changeCreator({Faktureringsadress: fact, org: org, person: person})
+        changeCreator({
+            Billing: Billing,
+            org: org,
+            person: person,
+            Organization_number: orgNr,
+            Organization_name: organisation
+        })
     }, [
         fakturAdress1,
         fakturEv,

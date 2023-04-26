@@ -1,6 +1,8 @@
 import React, {useEffect, useRef, useState} from 'react';
+import {useHttp} from "../../../API";
 import style from './document.module.css'
 const Dokument = ({changeMessage,changeMessageFile,changeType,changeProxy,whose}) => {
+    const {requestFile}=useHttp()
     const filePicker = useRef(null)
     const filePickerFullMark = useRef(null)
 
@@ -22,17 +24,25 @@ const Dokument = ({changeMessage,changeMessageFile,changeType,changeProxy,whose}
         changeType(type)
     }, [type])
 
-    async function handleUpload(selectedFiles) {
-        console.log(selectedFiles)
-        if (selectedFiles) {
-            const arrFile = []
-            for (let i = 0; i < selectedFiles.length; i++) {
-                arrFile.push(selectedFiles[i])
-            }
-            setMessageFile([...messageFile, ...arrFile])
+    async function handleUpload(selectedFiles,type) {
+        if(!selectedFiles) {
+            return;
         }
+        const arrFile = [];
+        const pathArray =[];
+        for (let i = 0; i < selectedFiles.length; i++) {
+            const path = await requestFile('/files', selectedFiles[i])
+            pathArray.push(path)
+            arrFile.push(selectedFiles[i])
+        }
+        if(type===1) {
+            changeMessageFile(pathArray)
+        }
+        if(type===2){
+            changeProxy(pathArray)
+        }
+        setMessageFile([...messageFile, ...arrFile])
     }
-
     function handlerPick() {
         filePicker.current.click();
     }
@@ -62,7 +72,7 @@ const Dokument = ({changeMessage,changeMessageFile,changeType,changeProxy,whose}
                 <h1>Meddelande</h1>
                 <textarea className={style.message} value={message} onChange={e => onChangeMessage(e)}/>
                 <button className={style.addFileButton} onClick={() => handlerPick()}/>
-                <input type={'file'} hidden={true} ref={filePicker} onChange={e => handleUpload(e.target.files)}
+                <input type={'file'} hidden={true} ref={filePicker} onChange={e => handleUpload(e.target.files,1)}
                        multiple/>
                 {messageFile.map((item, i) => (
                     <div key={i}>
@@ -77,7 +87,7 @@ const Dokument = ({changeMessage,changeMessageFile,changeType,changeProxy,whose}
                     Ladda upp patientens fullmakt eller få fullmakten via BankID
                 </h4>
                 <button className={style.addFileButton} onClick={() => handlerPickFullMark()}/>
-                <input type={"file"} hidden={true} ref={filePickerFullMark} onChange={e => handleUpload(e.target.files)}
+                <input type={"file"} hidden={true} ref={filePickerFullMark} onChange={e => handleUpload(e.target.files,2)}
                        multiple/>
                 <button className={style.bankIdButton}>BankID</button>
             </div>}

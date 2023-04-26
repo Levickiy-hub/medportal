@@ -2,126 +2,146 @@ import {useEffect, useState} from "react";
 import {useHttp} from "../../../API";
 
 export function useOrder() {
-    const [clinic,setClinic] = useState(null)
-    const [personNumber,setPersonNumber] = useState('')
-    const [fornamn,setFornamn] = useState('')
-    const [efternamn,setEfternamn] = useState('')
-    const [gatuadress,setGatuadress] = useState('')
-    const [address2,setAddress2] = useState('')
-    const [postnummer,setPostnummer] =useState('')
-    const [postOrt,setPostOrt] =useState('')
-    const [ePostAddress,setEPostAddress] = useState('')
-    const [telefon,setTelefon]=useState('')
-    const [whose,setWhose]=useState(null);
-    const [type,setType]=useState(null) //Записи в журнале, рентген,Другие документы Напишите в сообщении или прикрепите pdf
-    const [message,setMessage]= useState('')
-    const [messageFile,setMessageFile] = useState(null)
-    const [proxy,setProxy] = useState(null)
-    const [alertType,setAlertType] =useState(null)
-    const [creator,setCreator] =useState(null)
-    const [mailingAddress,setMailingAddress]=useState(null)
-    const [isActive,setIsActive]=useState([false,false,true]) // кнопка далее активна или нет
+    const [clinic, setClinic] = useState(null)
+    const [personNumber, setPersonNumber] = useState('')
+    const [fornamn, setFornamn] = useState('')
+    const [efternamn, setEfternamn] = useState('')
+    const [gatuadress, setGatuadress] = useState('')
+    const [address2, setAddress2] = useState('')
+    const [postnummer, setPostnummer] = useState('')
+    const [postOrt, setPostOrt] = useState('')
+    const [ePostAddress, setEPostAddress] = useState('')
+    const [telefon, setTelefon] = useState('')
+    const [whose, setWhose] = useState(null);
+    const [type, setType] = useState(null) //Записи в журнале, рентген,Другие документы Напишите в сообщении или прикрепите pdf
+    const [message, setMessage] = useState('')
+    const [messageFile, setMessageFile] = useState([])
+    const [proxy, setProxy] = useState([])
+    const [alertType, setAlertType] = useState(null)
+    const [creator, setCreator] = useState(null)
+    const [mailingAddress, setMailingAddress] = useState(null)
+    const [isActive, setIsActive] = useState([false, false, true]) // кнопка далее активна или нет
 
-    const{request}=useHttp()
-    function changePersonNumber(value){
+    const {request} = useHttp()
+
+    function changePersonNumber(value) {
         setPersonNumber(value);
     }
-    function changeFornamn(value){
+
+    function changeFornamn(value) {
         setFornamn(value)
     }
-    function changeEfternamn(value){
+
+    function changeEfternamn(value) {
         setEfternamn(value)
     }
-    function changeGatuadress(value){
+
+    function changeGatuadress(value) {
         setGatuadress(value)
     }
-    function changeAddress2(value){
+
+    function changeAddress2(value) {
         setAddress2(value)
     }
-    function changePostnummer(value){
+
+    function changePostnummer(value) {
         setPostnummer(value)
     }
-    function changeEPostAddress(value){
+
+    function changeEPostAddress(value) {
         setEPostAddress(value)
     }
-    function changeTelefon(value){
+
+    function changeTelefon(value) {
         setTelefon(value)
     }
-    function changeWhose(value){
+
+    function changeWhose(value) {
         setWhose(value)
     }
-    function changeType(value){
+
+    function changeType(value) {
         setType(value)
     }
-    function changeMessage(value){
+
+    function changeMessage(value) {
         setMessage(value)
     }
-    function changeMessageFile(value){
-        setMessageFile(value)
+
+    function changeMessageFile(value) {
+        setMessageFile([...messageFile, ...value])
     }
-    function changeProxy(value){
-        setProxy(value)
+
+    function changeProxy(value) {
+        setProxy([...proxy, ...value])
     }
-    function changeAlertType(value){
+
+    function changeAlertType(value) {
         setAlertType(value)
     }
-    function changePostOrt(value){
+
+    function changePostOrt(value) {
         setPostOrt(value)
     }
-    function changeCreator(obj){
+
+    function changeCreator(obj) {
         setCreator(obj)
     }
-    function changeMallingAddress(obj){
+
+    function changeMallingAddress(obj) {
         setMailingAddress(obj)
     }
-    function createObject(){
-        const data={
-            patient:{
-                personNumber:personNumber,
-                fornamn:fornamn,
-                efternamn:efternamn,
-                gatuadress:gatuadress,
-                address2:address2,
-                postnummer:postnummer,
-                postOrt:postOrt,
-                ePostAddress:ePostAddress,
-                telefon:telefon,
+
+    function createObject() {
+        const data = {
+            patient: {
+                PersonNumber: personNumber,
+                First_name: fornamn,
+                Last_name: efternamn,
+                Address1: gatuadress,
+                Address2: address2,
+                Postcode: postnummer,
+                Post_town: postOrt,
+                Email: ePostAddress,
+                Phone: telefon,
             },
-            whose:whose,
-            type:type,
-            message:message,
-            messageFile:messageFile,
-            proxy:proxy,
-            alertType:alertType,
-            creator:creator,
-            mailingAddress:mailingAddress
+            whose: whose,
+            type: type,
+            message: message,
+            messageFile: messageFile,
+            proxy: proxy,
+            alertType: alertType,
+            creator: creator,
+            mailingAddress: mailingAddress
         }
         return data
     }
-    function validate(data){
+
+    function validate(data) {
         return true
     }
-    function send(){
+
+    function send() {
         const data = createObject();
-        if(validate(data)){
+        if (validate(data)) {
             console.log(data);
-            request('http://localhost:3002/orders/','POST',data).then(data=>console.log(data)).then(err=>console.log(err))
+            request('/orders/', 'POST', data).then(data => console.log(data)).then(err => console.log(err))
         }
     }
-    useEffect(()=>{
+
+    useEffect(() => {
         let newIsActive = [...isActive];// создаем новый массив isActive
-        if(personNumber.length>0){
-            newIsActive[0]=true;
-        }
-        else{
-            newIsActive[0]=false;
+        if (personNumber.length > 0) {
+            newIsActive[0] = true;
+        } else {
+            newIsActive[0] = false;
         }
         setIsActive(newIsActive)// устанавливаем новый массив как состояние
-    },[personNumber])
+    }, [personNumber])
 
     useEffect(() => {
         const newIsActive = [...isActive]; // создаем новый массив isActive
-        if(whose !== null) {
+        if (whose !== null) {
             newIsActive[1] = true;
         } else {
             newIsActive[1] = false;

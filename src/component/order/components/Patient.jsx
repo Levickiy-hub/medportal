@@ -57,7 +57,7 @@ const Patient = ({changePersonNumber,changeEfternamn,changeFornamn,changePostnum
     //     changePersonNumber(personNumber)
     // },[personNumber])
     useEffect(()=>{
-        request('http://localhost:3002/1','GET').then(data=>console.log(data))
+        request('/1','GET').then(data=>console.log(data))
     },[])
     return (
         <div className={style.mainContainer}>

@@ -1,10 +1,10 @@
-
+import {BASE_URL} from "./config";
 export const useHttp=() => {
     const request = async (url, method = 'GET', options = {}) => {
         try {
             let data;
             if (method === 'GET' || method === 'DELETE') {
-                data = await fetch(url, {method: method})
+                data = await fetch(BASE_URL+url, {method: method})
             }
             if (method === 'POST' || method === 'PUT') {
                 const requestOptions = {
@@ -12,12 +12,21 @@ export const useHttp=() => {
                     headers: {'Content-Type': 'application/json'},
                     body: JSON.stringify(options),
                 };
-                data = await fetch(url, requestOptions);
+                data = await fetch(BASE_URL+url, requestOptions);
             }
             return data.json()
         } catch (e) {
             console.log(e)
         }
     }
-    return {request}
+    const requestFile = async (url,files)=>{
+        const formData = new FormData();
+        formData.append('file', files);
+        let data = await fetch(BASE_URL+url,{
+            method: 'POST',
+            body: formData
+        })
+        return data.json()
+    }
+    return {request,requestFile}
 }

@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import style from './mottagare.module.css'
+import useGetUser from "../hooks/getUserHook";
 const Mottagare = ({changeWhose,changeCreator}) => {
     const [checkedValue, setCheckedValue] = useState(null)
     const [personnummer, setPersonnummer] = useState('')
@@ -23,6 +24,9 @@ const Mottagare = ({changeWhose,changeCreator}) => {
     const [fakturTel, setFakturTel] = useState('')
     const [fakturAdress1, setFakturAdress1] = useState('')
     const [referens, setReferens] = useState('')
+    const [creator,setCreator]=useState(null)
+    const [organization,setOrganization]=useState(null)
+    const {requestUser,requestOrganization}=useGetUser();
 
     const onClick = (value) => {
         if (value === checkedValue) {
@@ -69,111 +73,128 @@ const Mottagare = ({changeWhose,changeCreator}) => {
             Organization_number: orgNr,
             Organization_name: organisation
         })
-    }, [
-        fakturAdress1,
-        fakturEv,
-        fakturPostnummer,
-        fakturgOrt,
-        fakturEmail,
-        orgTel,
-        organisation,
-        orgAdress1,
-        orgEv,
-        orgPostnummer,
-        orgOrt,
-        orgEmail,
-        orgTel,
-        personnummer,
-        fornamn,
-        efternamn,
-        email,
-        telNr,
-        befattning,
-        referens])
-
-    const changePersonalNumber = (e) => {
-        setPersonnummer(e.target.value)
+    }, [ fakturAdress1, fakturEv,fakturPostnummer,fakturgOrt,fakturEmail,orgTel,organisation,orgAdress1,orgEv,orgPostnummer,
+        orgOrt,orgEmail, orgTel,personnummer, fornamn,efternamn,email,telNr,befattning,referens,orgNr])
+    useEffect(()=>{
+        if(creator) {
+            changeFornamn(creator.First_name||'')
+            changeEfternamn(creator.Last_name||'')
+            changeEmail(creator.Email||'')
+            changeTel(creator.Mob_number||'')
+            changeBefattning(creator.Position||'')
+        }
+    },[creator])
+    useEffect(()=>{
+        if(organization) {
+            changeOrganisation(organization.Organization_name || '')
+            changeOrgNr(organization.Organization_number || '')
+            changeOrgAddress(organization.Address1 || '')
+            changeFaktAddress(organization.Billing_address1 || '')
+            changeOrgEV(organization.Address2 || '')
+            changeFaktEV(organization.Billing_address2 || '')
+            changeOrgPostnummer(organization.Postcode || '')
+            changeFaktPostnummer(organization.Billing_postcode || '')
+            changeOrgOrt(organization.Post_town || '')
+            changeFaktOrt(organization.Billing_post_town || '')
+            changeOrgEmail(organization.Email || '')
+            changeFaktEmail(organization.Billing_email || '')
+            changeOrgTel(organization.Phone || '')
+            changeFaktTel(organization.Billing_Phone || '')
+        }
+    },[organization])
+    const changePersonalNumber = (value) => {
+        setPersonnummer(value)
+        if(value.length===6 ||value.length===8){
+            requestUser(value).then(data=>{
+                setCreator(data)
+                if(data.OrganizationID){
+                    requestOrganization(data.OrganizationID).then(organizationItem=>{
+                            setOrganization(organizationItem)
+                    })
+                }
+            })
+        }
     }
-    const changeFornamn = (e) => {
-        setFornamn(e.target.value)
+    const changeFornamn = (value) => {
+        setFornamn(value)
     }
-    const changeEfternamn = (e) => {
-        setEfternamn(e.target.value)
+    const changeEfternamn = (value) => {
+        setEfternamn(value)
     }
-    const changeEmail = (e) => {
-        setEmail(e.target.value)
+    const changeEmail = (value) => {
+        setEmail(value)
     }
-    const changeTel = (e) => {
-        setTelNr(e.target.value)
+    const changeTel = (value) => {
+        setTelNr(value)
     }
-    const changeBefattning = (e) => {
-        setBefattning(e.target.value)
+    const changeBefattning = (value) => {
+        setBefattning(value)
     }
-    const changeOrganisation = (e) => {
+    const changeOrganisation = (value) => {
         if (organisation === orgNr) {
-            setOrgNr(e.target.value)
+            setOrgNr(value)
         }
-        setOrganisation(e.target.value)
+        setOrganisation(value)
     }
-    const changeOrgNr = (e) => {
-        setOrgNr(e.target.value)
+    const changeOrgNr = (value) => {
+        setOrgNr(value)
     }
-    const changeOrgAddress = (e) => {
+    const changeOrgAddress = (value) => {
         if (orgAdress1 === fakturAdress1) {
-            setFakturAdress1(e.target.value)
+            setFakturAdress1(value)
         }
-        setOrgAdress1(e.target.value)
+        setOrgAdress1(value)
     }
-    const changeFaktAddress = (e) => {
-        setFakturAdress1(e.target.value)
+    const changeFaktAddress = (value) => {
+        setFakturAdress1(value)
     }
-    const changeOrgPostnummer = (e) => {
+    const changeOrgPostnummer = (value) => {
         if (orgPostnummer === fakturPostnummer) {
-            setFakturPostnummer(e.target.value)
+            setFakturPostnummer(value)
         }
-        setOrgPostnummer(e.target.value)
+        setOrgPostnummer(value)
     }
-    const changeFaktPostnummer = (e) => {
-        setFakturPostnummer(e.target.value)
+    const changeFaktPostnummer = (value) => {
+        setFakturPostnummer(value)
     }
-    const changeOrgEV = (e) => {
+    const changeOrgEV = (value) => {
         if (orgEv === fakturEv) {
-            setFakturEv(e.target.value)
+            setFakturEv(value)
         }
-        setOrgEv(e.target.value)
+        setOrgEv(value)
     }
-    const changeFaktEV = (e) => {
-        setFakturEv(e.target.value)
+    const changeFaktEV = (value) => {
+        setFakturEv(value)
     }
-    const changeOrgOrt = (e) => {
+    const changeOrgOrt = (value) => {
         if (orgOrt === fakturgOrt) {
-            setFakturOrt(e.target.value)
+            setFakturOrt(value)
         }
-        setOrgOrt(e.target.value)
+        setOrgOrt(value)
     }
-    const changeFaktOrt = (e) => {
-        setFakturOrt(e.target.value)
+    const changeFaktOrt = (value) => {
+        setFakturOrt(value)
     }
-    const changeOrgEmail = (e) => {
+    const changeOrgEmail = (value) => {
         if (orgEmail === fakturEmail) {
-            setFakturEmail(e.target.value)
+            setFakturEmail(value)
         }
-        setOrgEmail(e.target.value)
+        setOrgEmail(value)
     }
-    const changeFaktEmail = (e) => {
-        setFakturEmail(e.target.value)
+    const changeFaktEmail = (value) => {
+        setFakturEmail(value)
     }
-    const changeOrgTel = (e) => {
+    const changeOrgTel = (value) => {
         if (orgTel === fakturTel) {
-            setFakturTel(e.target.value)
+            setFakturTel(value)
         }
-        setOrgTel(e.target.value)
+        setOrgTel(value)
     }
-    const changeFaktTel = (e) => {
-        setFakturTel(e.target.value)
+    const changeFaktTel = (value) => {
+        setFakturTel(value)
     }
-    const changeReference = (e) => {
-        setReferens(e.target.value)
+    const changeReference = (value) => {
+        setReferens(value)
     }
     return (
         <div className={style.mainContainer}>
@@ -193,89 +214,89 @@ const Mottagare = ({changeWhose,changeCreator}) => {
                 <h2>Beställare</h2>
                 <div>
                     <label>Personnummer</label>
-                    <input type={'text'} onChange={e => changePersonalNumber(e)}/>
+                    <input type={'text'} onChange={e => changePersonalNumber(e.target.value)}/>
                 </div>
                 {personnummer.length > 0 && <div>
                     <div>
                         <div className={style.nameContainer}>
                             <div>
                                 <label>Förnamn </label>
-                                <input type={'text'} value={fornamn} onChange={e => changeFornamn(e)}/>
+                                <input type={'text'} value={fornamn} onChange={e => changeFornamn(e.target.value)}/>
                             </div>
                             <div>
                                 <label>Efternamn </label>
-                                <input type={'text'} value={efternamn} onChange={e => changeEfternamn(e)}/>
+                                <input type={'text'} value={efternamn} onChange={e => changeEfternamn(e.target.value)}/>
                             </div>
                         </div>
                         <div>
                             <label>E-mail </label>
-                            <input type={'text'} value={email} onChange={e => changeEmail(e)}/>
+                            <input type={'text'} value={email} onChange={e => changeEmail(e.target.value)}/>
                         </div>
                         <div>
                             <label>Tel.nr. </label>
-                            <input type={'text'} value={telNr} onChange={e => changeTel(e)}/>
+                            <input type={'text'} value={telNr} onChange={e => changeTel(e.target.value)}/>
                         </div>
                         <div>
                             <label>Befattning </label>
-                            <input type={'text'} value={befattning} onChange={e => changeBefattning(e)}/>
+                            <input type={'text'} value={befattning} onChange={e => changeBefattning(e.target.value)}/>
                         </div>
                     </div>
                     <div className={style.organizationContainer}>
                         <div>
                             <div>
                                 <label>Organisation </label>
-                                <input type={'text'} value={organisation} onChange={e => changeOrganisation(e)}/>
+                                <input type={'text'} value={organisation} onChange={e => changeOrganisation(e.target.value)}/>
                             </div>
                             <label>Org. adress: </label>
                             <div className={style.organizationContainerItem}>
                                 <input type={'text'} placeholder={'Adress1'} value={orgAdress1}
-                                       onChange={e => changeOrgAddress(e)}/>
+                                       onChange={e => changeOrgAddress(e.target.value)}/>
 
                                 <input type={'text'} placeholder={'ev. c/o'} value={orgEv}
-                                       onChange={e => changeOrgEV(e)}/>
+                                       onChange={e => changeOrgEV(e.target.value)}/>
                                 <div className={style.address}>
                                     <input type={'text'} placeholder={'Postnummer'} value={orgPostnummer}
-                                           onChange={e => changeOrgPostnummer(e)}/>
+                                           onChange={e => changeOrgPostnummer(e.target.value)}/>
                                     <input type={'text'} placeholder={'Ort'} value={orgOrt}
-                                           onChange={e => changeOrgOrt(e)}/>
+                                           onChange={e => changeOrgOrt(e.target.value)}/>
                                 </div>
                                 <input type={'text'} placeholder={'E-mail'} value={orgEmail}
-                                       onChange={e => changeOrgEmail(e)}/>
+                                       onChange={e => changeOrgEmail(e.target.value)}/>
 
                                 <input type={'text'} placeholder={'Tel nr'} value={orgTel}
-                                       onChange={e => changeOrgTel(e)}/>
+                                       onChange={e => changeOrgTel(e.target.value)}/>
                             </div>
                         </div>
                         <div>
                             <div>
                                 <label>Org.nr. </label>
-                                <input type={'text'} value={orgNr} onChange={e => changeOrgNr(e)}/>
+                                <input type={'text'} value={orgNr} onChange={e => changeOrgNr(e.target.value)}/>
                             </div>
                             <label>Faktureringsadress: </label>
                             <div className={style.organizationContainerItem}>
                                 <input type={'text'} placeholder={'Adress1'} value={fakturAdress1}
-                                       onChange={e => changeFaktAddress(e)}/>
+                                       onChange={e => changeFaktAddress(e.target.value)}/>
 
                                 <input type={'text'} placeholder={'ev. c/o'} value={fakturEv}
-                                       onChange={e => changeFaktEV(e)}/>
+                                       onChange={e => changeFaktEV(e.target.value)}/>
                                 <div className={style.address}>
                                     <input type={'text'} placeholder={'Postnummer'} value={fakturPostnummer}
-                                           onChange={e => changeFaktPostnummer(e)}/>
+                                           onChange={e => changeFaktPostnummer(e.target.value)}/>
                                     <input type={'text'} placeholder={'Ort'} value={fakturgOrt}
-                                           onChange={e => changeFaktOrt(e)}/>
+                                           onChange={e => changeFaktOrt(e.target.value)}/>
                                 </div>
                                 <input type={'text'} placeholder={'E-mail'} value={fakturEmail}
-                                       onChange={e => changeFaktEmail(e)}/>
+                                       onChange={e => changeFaktEmail(e.target.value)}/>
 
                                 <input type={'text'} placeholder={'Tel nr'} value={fakturTel}
-                                       onChange={e => changeFaktTel(e)}/>
+                                       onChange={e => changeFaktTel(e.target.value)}/>
                             </div>
                         </div>
                     </div>
                     <div>
                         <div>
                             <label>Ev.referens: </label>
-                            <input type={'text'} value={referens} onChange={e => changeReference(e)}/>
+                            <input type={'text'} value={referens} onChange={e => changeReference(e.target.value)}/>
                         </div>
                     </div>
                 </div>

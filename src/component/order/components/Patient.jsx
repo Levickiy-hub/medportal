@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import {useHttp} from "../../../API";
 import style from './patient.module.css'
+import useGetUser from "../hooks/getUserHook";
 const Patient = ({changePersonNumber,changeEfternamn,changeFornamn,changePostnummer,changeEPostAddress,changeGatuadress,
                      changeTelefone,changePostOrt,changeAddress2}) => {
     const [personNumber,setPersonNumber] =useState('')
@@ -13,52 +14,68 @@ const Patient = ({changePersonNumber,changeEfternamn,changeFornamn,changePostnum
     const [postOrt,setPostOrt] =useState('')
     const [addField,setAddField]=useState(false)
     const [address2,setAddress2]=useState('')
+    const [patient,setPatient]=useState(null)
     const {request} =useHttp()
+    const {requestUser}=useGetUser();
     const onClickAddField =()=>{
         setAddField(!addField)
     }
-    const onChangePersonNumber =(e)=>{
-        setPersonNumber(e.target.value)
-        changePersonNumber(e.target.value)
+    const onChangePersonNumber = async (value)=>{
+        setPersonNumber(value)
+        changePersonNumber(value)
+        if(value.length===6 || value.length===8){
+        requestUser(value).then(data=>{
+            setPatient(data)
+        })
+        }
     }
-    const onChangeEfternamn =(e)=>{
-        setEfternamn(e.target.value)
-        changeEfternamn(e.target.value)
+    const onChangeEfternamn =(value)=>{
+        setEfternamn(value)
+        changeEfternamn(value)
     }
-    const onChangeFornamn =(e)=>{
-        setFornamn(e.target.value)
-        changeFornamn(e.target.value)
+    const onChangeFornamn =(value)=>{
+        setFornamn(value)
+        changeFornamn(value)
     }
-    const onChangePostnummer =(e)=>{
-        setPostnummer(e.target.value)
-        changePostnummer(e.target.value)
+    const onChangePostnummer =(value)=>{
+        setPostnummer(value)
+        changePostnummer(value)
     }
-    const onChangeEPostAddress =(e)=>{
-        setEPostAddress(e.target.value)
-        changeEPostAddress(e.target.value)
+    const onChangeEPostAddress =(value)=>{
+        setEPostAddress(value)
+        changeEPostAddress(value)
     }
-    const onChangeGatuadress =(e)=>{
-        setGatuadress(e.target.value)
-        changeGatuadress(e.target.value)
+    const onChangeGatuadress =(value)=>{
+        setGatuadress(value)
+        changeGatuadress(value)
     }
-    const onChangeAddress2 =(e)=>{
-        setAddress2(e.target.value)
-        changeAddress2(e.target.value)
+    const onChangeAddress2 =(value)=>{
+        setAddress2(value)
+        changeAddress2(value)
     }
-    const onChangeTelefone =(e)=>{
-        setTelefone(e.target.value)
-        changeTelefone(e.target.value)
+    const onChangeTelefone =(value)=>{
+        setTelefone(value)
+        changeTelefone(value)
     }
-    const onChangePostOrt =(e)=>{
-        setPostOrt(e.target.value)
-        changePostOrt(e.target.value)
+    const onChangePostOrt =(value)=>{
+        setPostOrt(value)
+        changePostOrt(value)
     }
-    // useEffect(()=>{
-    //     changePersonNumber(personNumber)
-    // },[personNumber])
     useEffect(()=>{
-        request('/1','GET').then(data=>console.log(data))
-    },[])
+       if(patient) {
+           onChangeFornamn(patient.First_name||'')
+           onChangeEfternamn(patient.Last_name||'')
+           onChangeGatuadress(patient.Address1||'')
+           onChangeAddress2(patient.Address2||'')
+           onChangePostnummer(patient.Postcode||'')
+           onChangePostOrt(patient.Post_town||'')
+           onChangeEPostAddress(patient.Email||'')
+           onChangeTelefone(patient.Mob_number||'')
+       }
+    },[patient])
+    // useEffect(()=>{
+    //     request('/1','GET').then(data=>console.log(data))
+    // },[])
     return (
         <div className={style.mainContainer}>
             <div>
@@ -73,32 +90,32 @@ const Patient = ({changePersonNumber,changeEfternamn,changeFornamn,changePostnum
                 <h1>Patient</h1>
                 <div className={style.lineContainer}>
                     <label>Patientes personnumber</label>
-                    <input type={'text'} onChange={e=>onChangePersonNumber(e)} required/>
+                    <input type={'text'} onChange={e=>onChangePersonNumber(e.target.value)} required/>
                 </div>
                 {personNumber.length > 0 &&
                 <div>
                     <div className={style.lineTableContainer}>
-                        <div className={style.lineContainer}><label>Fornamn</label><input type={'text'} onChange={e=>onChangeFornamn(e)} value={fornamn}/></div>
-                        <div className={style.lineContainer}><label>Efternamn</label><input type={'text'} onChange={e=>onChangeEfternamn(e)} value={efternamn}/></div>
+                        <div className={style.lineContainer}><label>Fornamn</label><input type={'text'} onChange={e=>onChangeFornamn(e.target.value)} value={fornamn}/></div>
+                        <div className={style.lineContainer}><label>Efternamn</label><input type={'text'} onChange={e=>onChangeEfternamn(e.target.value)} value={efternamn}/></div>
                     </div>
                     <div className={style.lineContainer}>
                         <div className={style.lineContainerLabel}>
                         <label>Gatuadress</label><label className={style.textButton} onClick={()=>onClickAddField()}> Lägg till c/o </label>
                         </div>
-                        <input type={'text'} onChange={e=>onChangeGatuadress(e)} value={gatuadress}/>
+                        <input type={'text'} onChange={e=>onChangeGatuadress(e.target.value)} value={gatuadress}/>
                     </div>
                     {addField &&
                     <div className={style.lineContainer}>
-                        <input type={'text'} onChange={e=>onChangeAddress2(e)} value={address2}/>
+                        <input type={'text'} onChange={e=>onChangeAddress2(e.target.value)} value={address2}/>
                     </div>
                     }
                     <div className={style.lineTableContainer}>
-                        <div className={style.lineContainer}><label>Postnummer</label><input type={'text'} onChange={e=>onChangePostnummer(e)} value={postnummer}/></div>
-                        <div className={style.lineContainer}><label>Postort</label><input type={'text'} onChange={e=>onChangePostOrt(e)} value={postOrt}/></div>
+                        <div className={style.lineContainer}><label>Postnummer</label><input type={'text'} onChange={e=>onChangePostnummer(e.target.value)} value={postnummer}/></div>
+                        <div className={style.lineContainer}><label>Postort</label><input type={'text'} onChange={e=>onChangePostOrt(e.target.value)} value={postOrt}/></div>
                     </div>
 
-                    <div className={style.lineContainer}><label>E-postadress</label><input type={'text'} onChange={e=>onChangeEPostAddress(e)} value={ePostAddress}/></div>
-                    <div className={style.lineContainer}><label>Telefon</label><input type={'text'} onChange={e=>onChangeTelefone(e)} value={telefone}/></div>
+                    <div className={style.lineContainer}><label>E-postadress</label><input type={'text'} onChange={e=>onChangeEPostAddress(e.target.value)} value={ePostAddress}/></div>
+                    <div className={style.lineContainer}><label>Telefon</label><input type={'text'} onChange={e=>onChangeTelefone(e.target.value)} value={telefone}/></div>
                 </div>
                 }
             </div>

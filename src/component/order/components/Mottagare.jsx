@@ -26,7 +26,10 @@ const Mottagare = ({changeWhose,changeCreator}) => {
     const [referens, setReferens] = useState('')
     const [creator,setCreator]=useState(null)
     const [organization,setOrganization]=useState(null)
-    const {requestUser,requestOrganization}=useGetUser();
+
+    const {requestUser,requestOrganization,status}=useGetUser();
+
+    const styleBorderRed ={backgroundColor:'rgb(252,218,221)'}
 
     const onClick = (value) => {
         if (value === checkedValue) {
@@ -102,19 +105,42 @@ const Mottagare = ({changeWhose,changeCreator}) => {
             changeFaktTel(organization.Billing_Phone || '')
         }
     },[organization])
-    const changePersonalNumber = (value) => {
-        setPersonnummer(value)
-        if(value.length===6 ||value.length===8){
-            requestUser(value).then(data=>{
-                setCreator(data)
-                if(data.OrganizationID){
-                    requestOrganization(data.OrganizationID).then(organizationItem=>{
-                            setOrganization(organizationItem)
-                    })
-                }
-            })
+    useEffect(()=>{
+        if(personnummer.length!==6 ||personnummer.length!==8) {
+            changeFornamn( '')
+            changeEfternamn( '')
+            changeEmail( '')
+            changeTel( '')
+            changeBefattning( '')
+            changeOrganisation( '')
+            changeOrgNr( '')
+            changeOrgAddress( '')
+            changeFaktAddress( '')
+            changeOrgEV( '')
+            changeFaktEV( '')
+            changeOrgPostnummer( '')
+            changeFaktPostnummer( '')
+            changeOrgOrt( '')
+            changeFaktOrt( '')
+            changeOrgEmail( '')
+            changeFaktEmail('')
+            changeOrgTel( '')
+            changeFaktTel( '')
         }
-    }
+    },[personnummer])
+    const changePersonalNumber = async (value) => {
+        try {
+            setPersonnummer(value);
+            const data = await requestUser(value);
+            setCreator(data);
+            if (data?.OrganizationID) {
+                const organizationItem = await requestOrganization(data.OrganizationID);
+                setOrganization(organizationItem);
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    };
     const changeFornamn = (value) => {
         setFornamn(value)
     }
@@ -214,82 +240,82 @@ const Mottagare = ({changeWhose,changeCreator}) => {
                 <h2>Beställare</h2>
                 <div>
                     <label>Personnummer</label>
-                    <input type={'text'} onChange={e => changePersonalNumber(e.target.value)}/>
+                    <input type={'text'} onChange={e => changePersonalNumber(e.target.value)} style={status==='success'?{}:styleBorderRed}/>
                 </div>
                 {personnummer.length > 0 && <div>
                     <div>
                         <div className={style.nameContainer}>
                             <div>
                                 <label>Förnamn </label>
-                                <input type={'text'} value={fornamn} onChange={e => changeFornamn(e.target.value)}/>
+                                <input type={'text'} value={fornamn} onChange={e => changeFornamn(e.target.value)} style={fornamn.length===0?styleBorderRed:{}}/>
                             </div>
                             <div>
                                 <label>Efternamn </label>
-                                <input type={'text'} value={efternamn} onChange={e => changeEfternamn(e.target.value)}/>
+                                <input type={'text'} value={efternamn} onChange={e => changeEfternamn(e.target.value)} style={efternamn.length===0?styleBorderRed:{}}/>
                             </div>
                         </div>
                         <div>
                             <label>E-mail </label>
-                            <input type={'text'} value={email} onChange={e => changeEmail(e.target.value)}/>
+                            <input type={'text'} value={email} onChange={e => changeEmail(e.target.value)} style={email.length===0?styleBorderRed:{}}/>
                         </div>
                         <div>
                             <label>Tel.nr. </label>
-                            <input type={'text'} value={telNr} onChange={e => changeTel(e.target.value)}/>
+                            <input type={'text'} value={telNr} onChange={e => changeTel(e.target.value)} style={telNr.length===0?styleBorderRed:{}}/>
                         </div>
                         <div>
                             <label>Befattning </label>
-                            <input type={'text'} value={befattning} onChange={e => changeBefattning(e.target.value)}/>
+                            <input type={'text'} value={befattning} onChange={e => changeBefattning(e.target.value)} style={befattning.length===0?styleBorderRed:{}}/>
                         </div>
                     </div>
                     <div className={style.organizationContainer}>
                         <div>
                             <div>
                                 <label>Organisation </label>
-                                <input type={'text'} value={organisation} onChange={e => changeOrganisation(e.target.value)}/>
+                                <input type={'text'} value={organisation} onChange={e => changeOrganisation(e.target.value)} style={fornamn.length===0?styleBorderRed:{}}/>
                             </div>
                             <label>Org. adress: </label>
                             <div className={style.organizationContainerItem}>
                                 <input type={'text'} placeholder={'Adress1'} value={orgAdress1}
-                                       onChange={e => changeOrgAddress(e.target.value)}/>
+                                       onChange={e => changeOrgAddress(e.target.value)} style={orgAdress1.length===0?styleBorderRed:{}}/>
 
                                 <input type={'text'} placeholder={'ev. c/o'} value={orgEv}
                                        onChange={e => changeOrgEV(e.target.value)}/>
                                 <div className={style.address}>
                                     <input type={'text'} placeholder={'Postnummer'} value={orgPostnummer}
-                                           onChange={e => changeOrgPostnummer(e.target.value)}/>
+                                           onChange={e => changeOrgPostnummer(e.target.value)} style={orgPostnummer.length===0?styleBorderRed:{}}/>
                                     <input type={'text'} placeholder={'Ort'} value={orgOrt}
-                                           onChange={e => changeOrgOrt(e.target.value)}/>
+                                           onChange={e => changeOrgOrt(e.target.value)} style={orgOrt.length===0?styleBorderRed:{}}/>
                                 </div>
                                 <input type={'text'} placeholder={'E-mail'} value={orgEmail}
-                                       onChange={e => changeOrgEmail(e.target.value)}/>
+                                       onChange={e => changeOrgEmail(e.target.value)} style={orgEmail.length===0?styleBorderRed:{}}/>
 
                                 <input type={'text'} placeholder={'Tel nr'} value={orgTel}
-                                       onChange={e => changeOrgTel(e.target.value)}/>
+                                       onChange={e => changeOrgTel(e.target.value)} style={orgTel.length===0?styleBorderRed:{}}/>
                             </div>
                         </div>
                         <div>
                             <div>
                                 <label>Org.nr. </label>
-                                <input type={'text'} value={orgNr} onChange={e => changeOrgNr(e.target.value)}/>
+                                <input type={'text'} value={orgNr} onChange={e => changeOrgNr(e.target.value)} style={orgTel.length===0?styleBorderRed:{}}/>
                             </div>
                             <label>Faktureringsadress: </label>
                             <div className={style.organizationContainerItem}>
                                 <input type={'text'} placeholder={'Adress1'} value={fakturAdress1}
-                                       onChange={e => changeFaktAddress(e.target.value)}/>
+                                       onChange={e => changeFaktAddress(e.target.value)} style={fakturAdress1.length===0?styleBorderRed:{}}/>
 
                                 <input type={'text'} placeholder={'ev. c/o'} value={fakturEv}
                                        onChange={e => changeFaktEV(e.target.value)}/>
                                 <div className={style.address}>
                                     <input type={'text'} placeholder={'Postnummer'} value={fakturPostnummer}
-                                           onChange={e => changeFaktPostnummer(e.target.value)}/>
+                                           onChange={e => changeFaktPostnummer(e.target.value)} style={fakturPostnummer.length===0?styleBorderRed:{}}/>
                                     <input type={'text'} placeholder={'Ort'} value={fakturgOrt}
-                                           onChange={e => changeFaktOrt(e.target.value)}/>
+                                           onChange={e => changeFaktOrt(e.target.value)} style={orgTel.length===0?styleBorderRed:{}}/>
                                 </div>
                                 <input type={'text'} placeholder={'E-mail'} value={fakturEmail}
-                                       onChange={e => changeFaktEmail(e.target.value)}/>
+                                       onChange={e => changeFaktEmail(e.target.value)} style={fakturEmail.length===0?styleBorderRed:{}}/>
 
                                 <input type={'text'} placeholder={'Tel nr'} value={fakturTel}
-                                       onChange={e => changeFaktTel(e.target.value)}/>
+                                       onChange={e => changeFaktTel(e.target.value)} style={fakturTel.length===0?styleBorderRed:{}}/>
                             </div>
                         </div>
                     </div>

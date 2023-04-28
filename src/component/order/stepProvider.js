@@ -9,12 +9,9 @@ const StepProvider = ({data=[],send,isActive}) => {
     function prev(){
         setStep(step-1)
     }
-    function onClickPagination(i){
-        setStep(i)
-    }
     const pagination = data.length>0?data.map((item,i)=>{
         return <div  key={'pag'+i}>
-            <div className={`${style.paginationElement} ${step===i&&style.paginationActiveElement}`} onClick={()=>onClickPagination(i)}>{i + 1}</div>
+            <div className={`${style.paginationElement} ${step===i&&style.paginationActiveElement}`}>{i + 1}</div>
             <h2 className={style.pagText}>{data[i]?.title}</h2>
         </div>
     }):<></>
@@ -32,7 +29,7 @@ const StepProvider = ({data=[],send,isActive}) => {
             <div className={style.buttonControlContainer}>
                 <button className={style.buttonControl} onClick={()=>prev()} disabled={step===0}>Tillbaka</button>
                 { data.length-1!==step ?
-                    <button className={`${style.buttonControl} ${style.buttonControlNext}`} onClick={()=>next()}disabled={!isActive[step]} >Ga vidare</button>:
+                    <button className={`${style.buttonControl} ${style.buttonControlNext}`} onClick={()=>next()} disabled={!isActive[step]} >Ga vidare</button>:
                     <button className={`${style.buttonControl} ${style.buttonControlNext}`} onClick={()=>send()} >Beställ</button>
                 }
             </div>

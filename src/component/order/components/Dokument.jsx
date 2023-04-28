@@ -9,6 +9,9 @@ const Dokument = ({changeMessage,changeMessageFile,changeType,changeProxy,whose}
     const [type, setType] = useState([])
     const [message, setMessage] = useState('')
     const [messageFile, setMessageFile] = useState([])
+    const [proxy,setProxy] = useState([])
+
+    const styleError = proxy.length===0?{color:'red'}:{}
     const onChangeMessage = (e) => {
         setMessage(e.target.value)
         changeMessage(e.target.value)
@@ -37,11 +40,13 @@ const Dokument = ({changeMessage,changeMessageFile,changeType,changeProxy,whose}
         }
         if(type===1) {
             changeMessageFile(pathArray)
+            setMessageFile([...messageFile, ...arrFile])
+
         }
         if(type===2){
             changeProxy(pathArray)
+            setProxy([...proxy,...arrFile])
         }
-        setMessageFile([...messageFile, ...arrFile])
     }
     function handlerPick() {
         filePicker.current.click();
@@ -82,7 +87,7 @@ const Dokument = ({changeMessage,changeMessageFile,changeType,changeProxy,whose}
             </div>
             {whose === 2 && <div>
                 <h2>Fullmakt</h2>
-                <h4>
+                <h4 style={styleError}>
                     Du beställer någon annans journal.
                     Ladda upp patientens fullmakt eller få fullmakten via BankID
                 </h4>
@@ -90,6 +95,11 @@ const Dokument = ({changeMessage,changeMessageFile,changeType,changeProxy,whose}
                 <input type={"file"} hidden={true} ref={filePickerFullMark} onChange={e => handleUpload(e.target.files,2)}
                        multiple/>
                 <button className={style.bankIdButton}>BankID</button>
+                {proxy.map((item, i) => (
+                    <div key={i}>
+                        {item.name}
+                    </div>
+                ))}
             </div>}
         </div>
     );

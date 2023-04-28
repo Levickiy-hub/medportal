@@ -15,19 +15,21 @@ const Patient = ({changePersonNumber,changeEfternamn,changeFornamn,changePostnum
     const [addField,setAddField]=useState(false)
     const [address2,setAddress2]=useState('')
     const [patient,setPatient]=useState(null)
+
     const {request} =useHttp()
-    const {requestUser}=useGetUser();
+    const {requestUser,status}=useGetUser();
+
+    const styleBorderRed ={backgroundColor:'rgb(252,218,221)'}
+
     const onClickAddField =()=>{
         setAddField(!addField)
     }
     const onChangePersonNumber = async (value)=>{
         setPersonNumber(value)
         changePersonNumber(value)
-        if(value.length===6 || value.length===8){
         requestUser(value).then(data=>{
-            setPatient(data)
+               setPatient(data)
         })
-        }
     }
     const onChangeEfternamn =(value)=>{
         setEfternamn(value)
@@ -73,9 +75,18 @@ const Patient = ({changePersonNumber,changeEfternamn,changeFornamn,changePostnum
            onChangeTelefone(patient.Mob_number||'')
        }
     },[patient])
-    // useEffect(()=>{
-    //     request('/1','GET').then(data=>console.log(data))
-    // },[])
+    useEffect(()=>{
+        if(personNumber.length!==6 ||personNumber.length!==8) {
+            onChangeFornamn('')
+            onChangeEfternamn('')
+            onChangeGatuadress('')
+            onChangeAddress2('')
+            onChangePostnummer('')
+            onChangePostOrt('')
+            onChangeEPostAddress('')
+            onChangeTelefone('')
+        }
+    },[personNumber])
     return (
         <div className={style.mainContainer}>
             <div>
@@ -90,19 +101,22 @@ const Patient = ({changePersonNumber,changeEfternamn,changeFornamn,changePostnum
                 <h1>Patient</h1>
                 <div className={style.lineContainer}>
                     <label>Patientes personnumber</label>
-                    <input type={'text'} onChange={e=>onChangePersonNumber(e.target.value)} required/>
+                    <input type={'text'} onChange={e=>onChangePersonNumber(e.target.value)} required style={status==='success'?{}:styleBorderRed}/>
                 </div>
                 {personNumber.length > 0 &&
                 <div>
                     <div className={style.lineTableContainer}>
-                        <div className={style.lineContainer}><label>Fornamn</label><input type={'text'} onChange={e=>onChangeFornamn(e.target.value)} value={fornamn}/></div>
-                        <div className={style.lineContainer}><label>Efternamn</label><input type={'text'} onChange={e=>onChangeEfternamn(e.target.value)} value={efternamn}/></div>
+                        <div className={style.lineContainer}><label>Fornamn</label><input type={'text'} onChange={e=>onChangeFornamn(e.target.value)} value={fornamn}
+                                                                                          style={fornamn.length!==0?{}:styleBorderRed}/></div>
+                        <div className={style.lineContainer}><label>Efternamn</label><input type={'text'} onChange={e=>onChangeEfternamn(e.target.value)} value={efternamn}
+                                                                                            style={efternamn.length!==0?{}:styleBorderRed}/></div>
                     </div>
                     <div className={style.lineContainer}>
                         <div className={style.lineContainerLabel}>
                         <label>Gatuadress</label><label className={style.textButton} onClick={()=>onClickAddField()}> Lägg till c/o </label>
                         </div>
-                        <input type={'text'} onChange={e=>onChangeGatuadress(e.target.value)} value={gatuadress}/>
+                        <input type={'text'} onChange={e=>onChangeGatuadress(e.target.value)} value={gatuadress}
+                               style={gatuadress.length!==0?{}:styleBorderRed}/>
                     </div>
                     {addField &&
                     <div className={style.lineContainer}>
@@ -110,12 +124,16 @@ const Patient = ({changePersonNumber,changeEfternamn,changeFornamn,changePostnum
                     </div>
                     }
                     <div className={style.lineTableContainer}>
-                        <div className={style.lineContainer}><label>Postnummer</label><input type={'text'} onChange={e=>onChangePostnummer(e.target.value)} value={postnummer}/></div>
-                        <div className={style.lineContainer}><label>Postort</label><input type={'text'} onChange={e=>onChangePostOrt(e.target.value)} value={postOrt}/></div>
+                        <div className={style.lineContainer}><label>Postnummer</label><input type={'text'} onChange={e=>onChangePostnummer(e.target.value)} value={postnummer}
+                                                                                             style={postnummer.length!==0?{}:styleBorderRed}/></div>
+                        <div className={style.lineContainer}><label>Postort</label><input type={'text'} onChange={e=>onChangePostOrt(e.target.value)} value={postOrt}
+                                                                                          style={postOrt.length!==0?{}:styleBorderRed}/></div>
                     </div>
 
-                    <div className={style.lineContainer}><label>E-postadress</label><input type={'text'} onChange={e=>onChangeEPostAddress(e.target.value)} value={ePostAddress}/></div>
-                    <div className={style.lineContainer}><label>Telefon</label><input type={'text'} onChange={e=>onChangeTelefone(e.target.value)} value={telefone}/></div>
+                    <div className={style.lineContainer}><label>E-postadress</label><input type={'text'} onChange={e=>onChangeEPostAddress(e.target.value)} value={ePostAddress}
+                                                                                           style={ePostAddress.length!==0?{}:styleBorderRed}/></div>
+                    <div className={style.lineContainer}><label>Telefon</label><input type={'text'} onChange={e=>onChangeTelefone(e.target.value)} value={telefone}
+                                                                                      style={telefone.length!==0?{}:styleBorderRed}/></div>
                 </div>
                 }
             </div>

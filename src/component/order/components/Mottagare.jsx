@@ -50,7 +50,8 @@ const Mottagare = ({changeWhose,changeCreator}) => {
             Postcode: fakturPostnummer,
             Post_town: fakturgOrt,
             Email: fakturEmail,
-            Phone: orgTel
+            Phone: orgTel,
+            reference: referens
         }
         const org = {
             Address1: orgAdress1,
@@ -67,7 +68,6 @@ const Mottagare = ({changeWhose,changeCreator}) => {
             Email: email,
             Mob_number: telNr,
             Position: befattning,
-            referens: referens
         }
         changeCreator({
             Billing: Billing,

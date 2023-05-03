@@ -1,6 +1,8 @@
 import {BASE_URL} from "./config";
+import toast from 'react-hot-toast';
+
 export const useHttp=() => {
-    const request = async (url, method = 'GET', options = {}) => {
+    const request = async (url, method = 'GET', options = {},toastMessageSuccess ='',toastMessageError) => {
         try {
             let data;
             if (method === 'GET' || method === 'DELETE') {
@@ -17,10 +19,13 @@ export const useHttp=() => {
             if (!data.ok) {
                 throw new Error(data.message || 'ERROR')
             }
-
+            if(toastMessageSuccess!==''){
+                toast.success(toastMessageSuccess)
+            }
             return data.json()
         } catch (e) {
             console.log(e)
+            toast.error(toastMessageError)
         }
     }
     const requestFile = async (url, files) => {

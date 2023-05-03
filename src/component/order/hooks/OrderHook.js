@@ -121,7 +121,7 @@ export function useOrder() {
     function send() {
         const data = createObject();
         console.log(data);
-        request('/orders/', 'POST', data).then(data => console.log(data)).catch(err => console.log(err))
+        request('/orders/', 'POST', data,'Успешно отправлено','Произошла Ошибка').then(data => console.log(data)).catch(err => console.log(err))
     }
 
     // Проверка заполнения всех обязательных полей

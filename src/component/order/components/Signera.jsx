@@ -50,9 +50,9 @@ const Signera = ({changeAlertType,changeMallingAddress}) => {
         <div>
             <div className={style.checkboxBox}>
                 <h1>Hur vill du få tillgång till beställda dokument?</h1>
-                <div onClick={() => onClickCheckBox(1)}><input type={'checkbox'}/><label>via SMS</label></div>
-                <div onClick={() => onClickCheckBox(2)}><input type={'checkbox'}/><label>via E-mail</label></div>
-                <div onClick={() => onClickCheckBox(3)}><input type={'checkbox'}/><label>Beställer kopior på papper och
+                <div onClick={() => onClickCheckBox(1)}><input type={'checkbox'} checked={alertType.includes(1)} readOnly/><label>via SMS</label></div>
+                <div onClick={() => onClickCheckBox(2)}><input type={'checkbox'} checked={alertType.includes(2)} readOnly/><label>via E-mail</label></div>
+                <div onClick={() => onClickCheckBox(3)}><input type={'checkbox'} checked={alertType.includes(3)} readOnly/><label>Beställer kopior på papper och
                     USB (kostar 400 kr)</label></div>
             </div>
             <div className={style.address}>

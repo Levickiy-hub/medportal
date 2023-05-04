@@ -24,6 +24,9 @@ export function useOrder() {
 
     const {request} = useHttp()
 
+    function changeClinic(value) {
+        setClinic(value);
+    }
     function changePersonNumber(value) {
         setPersonNumber(value);
     }
@@ -94,6 +97,7 @@ export function useOrder() {
 
     function createObject() {
         const data = {
+            clinic:clinic,
             patient: {
                 PersonNumber: personNumber,
                 First_name: fornamn,
@@ -219,6 +223,7 @@ export function useOrder() {
         setIsActive(updatedIsActive);
     }, [type]);
     return {
+        changeClinic,
         changeMessage,
         changePersonNumber,
         changeAlertType,

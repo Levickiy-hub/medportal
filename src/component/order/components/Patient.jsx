@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react'
-import {useHttp} from "../../../API";
 import style from './patient.module.css'
 import useGetUser from "../hooks/getUserHook";
-const Patient = ({changePersonNumber,changeEfternamn,changeFornamn,changePostnummer,changeEPostAddress,changeGatuadress,
+import SelectClinic from "./SelectClinic";
+const Patient = ({changeClinic,changePersonNumber,changeEfternamn,changeFornamn,changePostnummer,changeEPostAddress,changeGatuadress,
                      changeTelefone,changePostOrt,changeAddress2}) => {
     const [personNumber,setPersonNumber] =useState('')
     const [efternamn,setEfternamn] =useState('')
@@ -16,7 +16,6 @@ const Patient = ({changePersonNumber,changeEfternamn,changeFornamn,changePostnum
     const [address2,setAddress2]=useState('')
     const [patient,setPatient]=useState(null)
 
-    const {request} =useHttp()
     const {requestUser,status}=useGetUser();
 
     const styleBorderRed ={backgroundColor:'rgb(252,218,221)'}
@@ -89,14 +88,7 @@ const Patient = ({changePersonNumber,changeEfternamn,changeFornamn,changePostnum
     },[personNumber])
     return (
         <div className={style.mainContainer}>
-            <div>
-                <h1>Välj klinik</h1>
-                <select className={style.mainContainerSelect}>
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                </select>
-            </div>
+                <SelectClinic changeClinic={changeClinic}/>
             <div>
                 <h1>Patient</h1>
                 <div className={style.lineContainer}>

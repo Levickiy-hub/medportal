@@ -8,6 +8,7 @@ const SelectClinic = ({changeClinic=()=>{}}) => {
 
     const [clinic, setClinic] = useState([])
     const [fields, setFields] = useState([])
+    const [value,setValue] = useState(0)
     useEffect(() => {
         request('/organizations?type=clinic').then(data => {
             setClinic(data)
@@ -17,13 +18,16 @@ const SelectClinic = ({changeClinic=()=>{}}) => {
         setFields(clinic?.map((data, i) => (<option key={i} value={data.id}>{data.Clinic_name}</option>)))
     }, [clinic])
     const change = (e) => {
-        changeClinic(e.target.value)
+        setValue(e.target.value)
     }
-
+    useEffect(()=>{
+        changeClinic(value)
+    },[value])
     return (
         <div>
             <h1>Välj klinik</h1>
             <select className={style.mainContainerSelect} onChange={e => {change(e)}}>
+                {value === 0 && <option> Выберите клинику</option>}
                 {fields}
             </select>
         </div>

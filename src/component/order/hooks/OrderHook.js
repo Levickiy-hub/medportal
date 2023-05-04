@@ -137,6 +137,7 @@ export function useOrder() {
 
         // Проверяем, заполнены ли все обязательные поля
         const isRequiredFieldsFilled =
+            clinic &&
             fornamn.length > 0 &&
             efternamn.length > 0 &&
             gatuadress.length > 0 &&
@@ -152,6 +153,7 @@ export function useOrder() {
         // Устанавливаем новый массив updatedIsActive в качестве состояния
         setIsActive(updatedIsActive);
     }, [
+        clinic,
         personNumber,
         fornamn,
         efternamn,

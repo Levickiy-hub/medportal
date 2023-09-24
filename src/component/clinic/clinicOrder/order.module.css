@@ -1,0 +1,46 @@
+.mainContainer{
+    display:flex;
+    justify-content: space-between;
+}
+.mainContainer h1,h2{
+    color: #000000;
+    font-size: 18px;
+}
+.mainCell{
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+}
+.messageContainer{
+    border:1px solid black;
+    border-radius: 12px;
+    background: #e0e0e0;
+    width: 338px;
+    min-height: 172px;
+    padding: 8px;
+}
+.container{
+    display:flex;
+    justify-content: space-between;
+    margin-top: 40px;
+}
+.buttonContainer{
+    display:flex;
+    align-items: flex-end;
+}
+.buttonAccept{
+    background-color: #e6983e;
+    color: #ffffff;
+}
+.buttonDismiss{
+    background-color: #c3c4c7;
+}
+.buttonContainer button{
+    border: none;
+    font-size: 14px;
+    border-radius: 5px;
+    width: 114px;
+    height: 42px;
+    margin-left:10px;
+}

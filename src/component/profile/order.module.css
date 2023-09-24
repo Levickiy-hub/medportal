@@ -1,0 +1,79 @@
+.wrapper{
+    width: 950px;
+    display: flex;
+    min-height: 140px;
+    flex-wrap: wrap;
+}
+
+.orderWrapper{
+    padding: 5px 16px;
+    font-size: 14px;
+    line-height: 20px;
+    white-space: nowrap;
+    border: 1px solid #d0d7de;
+    border-radius: 6px;
+    background-color: white;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+    display: flex;
+    width: 430px;
+    height: 120px;
+    justify-content: space-between;
+    margin-left: 10px;
+}
+.orderName{
+    display: flex;
+    flex-direction: column;
+}
+.orderName a{
+    color:blue;
+    font-weight: bold;
+    font-size: 18px;
+    padding-left: 0;
+}
+
+.orderWrapper h3{
+    line-height: 1.25;
+    margin: 0;
+    font-weight: 300;
+}
+
+
+.statusCircle{
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #0351c1;
+}
+.statusStr{
+    display: flex;
+}
+.status{
+    line-height: 1.25;
+    white-space: nowrap;
+    font-weight: 300;
+    margin: 0 0 0 10px;
+}
+.dateWrapper{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: space-between;
+}
+
+.сategoryName{
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    margin-top:0;
+}
+
+.zeroOrderContainer{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: blue;
+    font-weight: bold;
+    font-size: 18px;
+    padding-left: 0;
+}

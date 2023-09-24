@@ -1,0 +1,10 @@
+.mainBlock{
+   display: flex;
+   justify-content: center;
+}
+
+.secondBlock{
+   margin-left: 36px;
+   width: 760px;
+   margin-right: 50px;
+}

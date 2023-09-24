@@ -1,0 +1,59 @@
+.mainBlock{
+    margin-top: 16px;
+}
+.panel{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: solid 2px #4d4c4c;
+    margin-top: 12px;
+}
+.panelButton{
+    display: flex;
+    justify-content: space-between;
+}
+.panelButton h2{
+    margin-right: 20px;
+    font-size: 19px;
+    color: #4d4c4c;
+}
+.panelSelect{
+    color: rgb(59, 59, 59);
+    border: 0 solid rgb(209, 209, 209);
+    background-color: rgb(201, 201, 201);
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 400;
+    height: 25px;
+}
+
+.tableHead{
+    border-radius: 5px;
+    background-color: #d6d2d2;
+    background-position: center center;
+    border-color: transparent;
+    border-style: solid;
+}
+.tableHead td{
+    line-height: 26px;
+    text-align: center;
+}
+.tableBox{
+    width:100%;
+    border-collapse: collapse;
+}
+.tableBody td{
+    padding: 16px; /* Поля вокруг текста */
+}
+
+.grayTr{
+    background-color: #d6d2d2;
+}
+
+.tableFoot {
+    width: 100%;
+    font-size: 14px;
+    margin: 0;
+    background-color: #d6d2d2;
+    text-align: center;
+}

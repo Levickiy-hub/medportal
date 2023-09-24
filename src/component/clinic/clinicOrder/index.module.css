@@ -1,0 +1,13 @@
+.buttonContainer{
+    margin-top: 20px;
+    border-bottom:5px solid #e3e3e3;
+}
+.buttonContainer button{
+    border:none;
+    background: none;
+    color: #4d4c4c;
+    font-size: 20px;
+}
+.container{
+    margin-top: 12px;
+}

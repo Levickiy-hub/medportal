@@ -49,7 +49,7 @@ const Calendar = ({data=[]}) => {
                          onMouseEnter={(e) => setHoveredDate(<DateWrapper date={trimmedDateString} value={activesDates} event={e}/>)}
                          onMouseLeave={() => setHoveredDate(null)}
                     />
-                );
+                )
             }
 
             if (month === 11) {
